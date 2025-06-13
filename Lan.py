@@ -1,8 +1,8 @@
 from telebot import types
 from pathlib import Path
-from Config import bot, Alex_id
-from Localization.localization_loader import load_locales_from_folder
 
+from Localization.localization_loader import load_locales_from_folder
+Alex_id = 1346718456
 # ========================== Языки и флаги ==========================
 language_display_names = {
     "русский": "🇷🇺Русский",
