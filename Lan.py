@@ -3,7 +3,7 @@ from pathlib import Path
 import telebot
 from Localization.localization_loader import load_locales_from_folder
 Alex_id = 1346718456
-bot = telebot.TeleBot('7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ')
+
 # ========================== Языки и флаги ==========================
 language_display_names = {
     "русский": "🇷🇺Русский",
