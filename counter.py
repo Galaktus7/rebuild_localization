@@ -6,7 +6,7 @@ import telebot
 import os
 from pymongo import MongoClient
 
-token = '7315904022:AAHLtlGpPpUxkllvjpfTnNSpzEMv_-zElIQ'
+token = ''
 bot = TeleBot(token)
 
 print('trying to connect...')
