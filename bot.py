@@ -17,7 +17,7 @@ from openworld import *
 import pokemonlist
 import shennon
 import math
-
+from Lan import lt, localized_language_name
 from shop_items import name_to_weapon
 
 from chatwars import cw_skillinfo, cw_weaponlist
@@ -69,7 +69,7 @@ def create_demons_for_rat():
 from constants import *
 
 token = os.environ['token']
-token = '' #ТОКЕН ВЕГАНКИ
+token = '7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ' #ТОКЕН ВЕГАНКИ
 #token = '' #ТОКЕН ДЛЯ ТЕСТОВ
 bot = TeleBot(token)
 print(bot.get_me())
