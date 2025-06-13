@@ -1,9 +1,9 @@
-cwbottoken = ""
-cwlogstoken = ""
+cwbottoken = "1619953738:AAEu-D9-8K-GoJPrp2y3S3kWCqJq8BEt4fA"
+cwlogstoken = "1619953738:AAEu-D9-8K-GoJPrp2y3S3kWCqJq8BEt4fA"
 
-officialchat = -1001779172290
+officialchat = -1002690782115
 
-pasyuk_id = 656473214
+pasyuk_id = 1346718456
 
 sokrushcd = 5
 chaincd = 5
@@ -12,7 +12,7 @@ firearrowcd = 5
 watershieldcd = 6
 spectateallgames = True
 timefromstart = -120
-botfights = -1001788686691
+botfights = -1002690782115
 
 cwratitems = ['grenade', 'adrenaline', 'shield', 'flash', 'molotov', 'knife']
 
