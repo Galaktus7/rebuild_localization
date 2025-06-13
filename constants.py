@@ -1,5 +1,5 @@
-cwbottoken = "1619953738:AAEu-D9-8K-GoJPrp2y3S3kWCqJq8BEt4fA"
-cwlogstoken = "1619953738:AAEu-D9-8K-GoJPrp2y3S3kWCqJq8BEt4fA"
+cwbottoken = ""
+cwlogstoken = "1"
 
 officialchat = -1002690782115
 
