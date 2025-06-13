@@ -1,0 +1,13 @@
+pyTelegramBotAPI
+redis
+emoji
+pymongo
+dnspython
+#vk_api
+heroku3
+pyfiglet
+folium
+pyrogram
+tgcrypto
+pillow
+pyyaml
