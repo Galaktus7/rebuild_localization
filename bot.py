@@ -81,11 +81,6 @@ cwbot = TeleBot(cwbottoken, num_threads=1)
 #cwbot = TeleBot(token, num_threads = 2) # ТЕСТОВЫЙ ТОКЕН
 cwlogs = TeleBot(cwlogstoken)
 
-ratcastlelogsbot = telebot.TeleBot("1619953738:AAEu-D9-8K-GoJPrp2y3S3kWCqJq8BEt4fA")
-explosioncastlelogsbot = telebot.TeleBot("1619953738:AAEu-D9-8K-GoJPrp2y3S3kWCqJq8BEt4fA")
-darkcastlelogsbot = telebot.TeleBot("1619953738:AAEu-D9-8K-GoJPrp2y3S3kWCqJq8BEt4fA")
-necromantcastlelogsbot = telebot.TeleBot("1619953738:AAEu-D9-8K-GoJPrp2y3S3kWCqJq8BEt4fA")
-
 radiodemonphoto = 'AgACAgIAAxkBAAFWvZdlu81ilDpKOcbV2iS6xyQHpQMtpgACadIxG99S4ElQibTbkJ2SkwEAAwIAA3kAAzQE'
 knight_photo = "AgACAgIAAxkBAAGXY6loPrZTdxQy-ZoknAQ2e_bxgB_0dwACgPMxG82Y-UmAjLGPg2XlCwEAAwIAA3kAAzYE"
 
