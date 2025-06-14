@@ -17,9 +17,9 @@ from openworld import *
 import pokemonlist
 #import shennon
 import math
-#import Lan
+import Lan #z
 from shop_items import name_to_weapon
-
+from Config import bot    #z
 from chatwars import cw_skillinfo, cw_weaponlist
 from chatwars.utils import *
 from chatwars.db import CWDatabase
@@ -68,11 +68,11 @@ def create_demons_for_rat():
 
 from constants import *
 
-token = os.environ['token']
-token = '7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ' #ТОКЕН ВЕГАНКИ
+#token = os.environ['token']
+#token = '7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ' #ТОКЕН ВЕГАНКИ
 #token = '' #ТОКЕН ДЛЯ ТЕСТОВ
-bot = TeleBot(token)
-print(bot.get_me())
+#bot = TeleBot(token)
+#print(bot.get_me())
 
 novice_alex_id = 674065123
 pasyuk_2_id = 1346718456
