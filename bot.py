@@ -15,11 +15,11 @@ from datetime import datetime
 import requests
 from openworld import *
 import pokemonlist
-import shennon
+#import shennon
 import math
-
+import Lan
+from config import bot
 from shop_items import name_to_weapon
-
 from chatwars import cw_skillinfo, cw_weaponlist
 from chatwars.utils import *
 from chatwars.db import CWDatabase
@@ -68,23 +68,23 @@ def create_demons_for_rat():
 
 from constants import *
 
-token = os.environ['token']
-token = '' #ТОКЕН ВЕГАНКИ
+#token = os.environ['token']
+#token = '7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ' #ТОКЕН ВЕГАНКИ
 #token = '' #ТОКЕН ДЛЯ ТЕСТОВ
-bot = TeleBot(token)
-print(bot.get_me())
+#bot = TeleBot(token)
+#print(bot.get_me())
 
 novice_alex_id = 674065123
-pasyuk_2_id = 441399484
+pasyuk_2_id = 1346718456
 
 cwbot = TeleBot(cwbottoken, num_threads=1)
 #cwbot = TeleBot(token, num_threads = 2) # ТЕСТОВЫЙ ТОКЕН
 cwlogs = TeleBot(cwlogstoken)
 
-ratcastlelogsbot = telebot.TeleBot("")
-explosioncastlelogsbot = telebot.TeleBot("")
-darkcastlelogsbot = telebot.TeleBot("")
-necromantcastlelogsbot = telebot.TeleBot("")
+#ratcastlelogsbot = telebot.TeleBot("")
+#explosioncastlelogsbot = telebot.TeleBot("")
+#darkcastlelogsbot = telebot.TeleBot("")
+#necromantcastlelogsbot = telebot.TeleBot("")
 
 radiodemonphoto = 'AgACAgIAAxkBAAFWvZdlu81ilDpKOcbV2iS6xyQHpQMtpgACadIxG99S4ElQibTbkJ2SkwEAAwIAA3kAAzQE'
 knight_photo = "AgACAgIAAxkBAAGXY6loPrZTdxQy-ZoknAQ2e_bxgB_0dwACgPMxG82Y-UmAjLGPg2XlCwEAAwIAA3kAAzYE"
