@@ -76,7 +76,7 @@ print(bot.get_me())
 
 novice_alex_id = 674065123
 pasyuk_2_id = 441399484
-
+cwbottoken = os.getenv("CWBOT_TOKEN")
 cwbot = TeleBot(cwbottoken, num_threads=1)
 #cwbot = TeleBot(token, num_threads = 2) # ТЕСТОВЫЙ ТОКЕН
 cwlogs = TeleBot(cwlogstoken)
