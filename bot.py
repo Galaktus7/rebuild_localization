@@ -69,7 +69,7 @@ def create_demons_for_rat():
 from constants import *
 
 #token = os.environ['token']
-#token = '7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ' #ТОКЕН ВЕГАНКИ
+token = '7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ' #ТОКЕН ВЕГАНКИ
 #token = '' #ТОКЕН ДЛЯ ТЕСТОВ
 #bot = TeleBot(token)
 #print(bot.get_me())
