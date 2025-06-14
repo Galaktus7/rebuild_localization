@@ -7,7 +7,7 @@ import telebot
 import os
 token = os.environ['token']
 
-bot = telebot.TeleBot('')
+bot = telebot.TeleBot('7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ')
 
 testbot = telebot.TeleBot('')
 
