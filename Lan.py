@@ -14,8 +14,9 @@ Alex_id = 1346718456
 # ========================== Отображаемые имена языков (с флагами) ==========================
 language_display_names = {
     "русский": "🇷🇺Русский",
-    "английский": "🇬🇧English",
-    "украинский": "🇺🇦Українська",
+    "узбекский": "uzO'zbekcha",
+    #"английский": "🇬🇧English",
+    #"украинский": "🇺🇦Українська",
 }
 
 # ========================== Локализация текстов из JSON ==========================
@@ -100,7 +101,7 @@ def lt(target_id: int, key: str, force_lang: str = None) -> str:
         lang = (chat_language_preferences.get(target_id, "русский")
                 if target_id < 0 else
                 user_language_preferences.get(target_id, "русский"))
-        code = {"русский": "ru", "английский": "en", "украинский": "uk"}.get(lang, "ru")
+        code = {"русский": "ru", "узбекский": "uz"}.get(lang, "ru")
     return LocalizedString(key).localize(code)
 
 
@@ -137,7 +138,7 @@ def admin_set_language(message):
 
     # Строим inline-клавиатуру с флагами
     kb = types.InlineKeyboardMarkup()
-    for key in ["русский", "английский", "украинский"]:
+    for key in ["русский", "узбекский"]:
         kb.add(types.InlineKeyboardButton(
             text=localized_language_name(key),
             callback_data=f"adminset_{key}"
@@ -178,8 +179,8 @@ def handle_admin_language_buttons(call):
         text=lt(chat_id, "current_group_language_set").format(lang=localized_language_name(selected))
     )
 
-    if selected == "украинский":
-        bot.send_message(chat_id, lt(chat_id, "ua_gratitude"))
+    if selected == "узбекский":
+        bot.send_message(chat_id, lt(chat_id, "uz_gratitude"))
 
 
 # ========================== /set_l ==========================
@@ -195,7 +196,7 @@ def set_language(message):
     current = user_language_preferences.get(user_id, "русский")
 
     kb = types.InlineKeyboardMarkup()
-    for key in ["русский", "английский", "украинский"]:
+    for key in ["русский", "узбекский"]:
         kb.add(types.InlineKeyboardButton(
             text=localized_language_name(key),
             callback_data=key
