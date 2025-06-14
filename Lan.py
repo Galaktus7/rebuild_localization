@@ -207,3 +207,27 @@ def set_language(message):
         lt(user_id, "current_user_language").format(lang=localized_language_name(current)),
         reply_markup=kb
     )
+    
+@bot.callback_query_handler(func=lambda call: call.data in ["русский", "узбекский"])
+def handle_user_language_buttons(call):
+    user_id = call.from_user.id
+    selected = call.data.lower()
+    user_language_preferences[user_id] = selected
+
+    # Подтверждение (всплывающее сообщение)
+    bot.answer_callback_query(
+        call.id,
+        lt(user_id, "language_set").format(lang=localized_language_name(selected))
+    )
+
+    # Редактируем исходное сообщение
+    bot.edit_message_text(
+        chat_id=user_id,
+        message_id=call.message.message_id,
+        text=lt(user_id, "current_language_set").format(lang=localized_language_name(selected))
+    )
+
+    # Дополнительное сообщение при выборе узбекского (если нужно)
+    if selected == "узбекский":
+        bot.send_message(user_id, lt(user_id, "uz_gratitude"))
+
