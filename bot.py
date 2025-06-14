@@ -23,7 +23,7 @@ from config import bot    #z
 from chatwars import cw_skillinfo, cw_weaponlist
 from chatwars.utils import *
 from chatwars.db import CWDatabase
-
+from parser.battle_log_reader import start_parser
 def sendm(b, chat_id, text, parse_mode=None, entities=None,
     disable_web_page_preview=None, disable_notification=None, protect_content= None, reply_to_message_id= None,
     allow_sending_without_reply= None,
