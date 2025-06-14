@@ -1,6 +1,3 @@
 games_disabled: "Проводятся технические работы, игры временно недоступны!"
-game_preparing: "Подготовка к игре запущена! /v_join для присоединения, /v_go для запуска."
+game_preparing: "еПодготовка к игре запущена! /v_join для присоединения, /v_go для запуска."
 game_already_exists: "В этом чате уже есть игра!"
-private_only_language_change: "tilniki"
-current_language_set: "til2"
-language_set: "til3"
