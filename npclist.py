@@ -5,9 +5,7 @@ import time
 
 import telebot
 import os
-token = os.environ['token']
-
-bot = telebot.TeleBot('7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ')
+from config import bot
 
 testbot = telebot.TeleBot('8080452545:AAF2XQ1QZugaMgoihO3LJHpVHIe6SMf1Dso')
 
