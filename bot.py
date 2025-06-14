@@ -19,7 +19,7 @@ import pokemonlist
 import math
 import Lan #z
 from shop_items import name_to_weapon
-from Config import bot    #z
+from config import bot    #z
 from chatwars import cw_skillinfo, cw_weaponlist
 from chatwars.utils import *
 from chatwars.db import CWDatabase
