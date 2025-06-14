@@ -79,7 +79,7 @@ pasyuk_2_id = 441399484
 cwbottoken = os.getenv("CWBOT_TOKEN")
 cwbot = TeleBot(cwbottoken, num_threads=1)
 #cwbot = TeleBot(token, num_threads = 2) # ТЕСТОВЫЙ ТОКЕН
-cwlogs = TeleBot(cwlogstoken)
+#cwlogs = TeleBot(cwlogstoken)
 
 radiodemonphoto = 'AgACAgIAAxkBAAFWvZdlu81ilDpKOcbV2iS6xyQHpQMtpgACadIxG99S4ElQibTbkJ2SkwEAAwIAA3kAAzQE'
 knight_photo = "AgACAgIAAxkBAAGXY6loPrZTdxQy-ZoknAQ2e_bxgB_0dwACgPMxG82Y-UmAjLGPg2XlCwEAAwIAA3kAAzYE"
