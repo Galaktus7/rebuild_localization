@@ -17,7 +17,7 @@ cwratitems = ['grenade', 'adrenaline', 'shield', 'flash', 'molotov', 'knife']
 
 busy_acts = ['quest_rathunt', 'quest_castle_protect', 'quest_noise_check', 'bar', 'troll', 'wait_help']
 
-fullreportschannel = -1001817520048
+fullreportschannel = -1002731947754
 
 ratslink = ''
 darklink = ''
