@@ -10,7 +10,9 @@ class Weapon(object):
         self.classic = False
         self.modification = 0
         self.lvl = 0
-
+    def get_internal_name(self):
+        return self.__class__.__name__ 
+#get_internal_name чтоы не использовать self name
 
 class Pistol(Weapon):
     def __init__(self):
