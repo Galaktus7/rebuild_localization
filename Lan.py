@@ -13,17 +13,14 @@ Alex_id = 1346718456
 user_language = {}  # user_id: "ru" / "uz"
 
 # Настройка: какие файлы подключать
+from pathlib import Path
+
+def find_language_files(suffix):
+    return [f.name for f in Path("Localization").glob(f"*_{suffix}.yaml")]
+
 language_files = {
-    "ru": [
-        "glossary_ru.yaml",
-        "game_ru.yaml",
-        "weapons_ru.yaml"
-    ],
-    "uz": [
-        "glossary_uz.yaml",
-        "game_uz.yaml",
-        "weapons_uz.yaml"
-    ]
+    "ru": find_language_files("ru"),
+    "uz": find_language_files("uz")
 }
 
 def load_json(path: Path) -> dict:
