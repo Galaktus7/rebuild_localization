@@ -3,9 +3,9 @@ import random
 #root = Tk()
 #btn1 = Button(root, text="")
 #btn.config(command=lambda: print("Привет, Tkinter!"))
-import telebot
-from telebot import types
-bot = telebot.TeleBot("5411126548:AAEi5SIYevtm4jCyMb4QFKCkTebsB_i5dJc")
+#import telebot
+#from telebot import types
+#bot = telebot.TeleBot("5411126548:AAEi5SIYevtm4jCyMb4QFKCkTebsB_i5dJc")
 
 games = {}
 
