@@ -1,5 +1,6 @@
 from telebot import types
 from pathlib import Path
+from bot import bot
 from Localization.localization_loader import load_locales_from_folder
 Alex_id = 1346718456
 
