@@ -15,7 +15,7 @@ from datetime import datetime
 import requests
 from openworld import *
 import pokemonlist
-import shennon
+#import shennon
 import math
 #from Lan import lt, localized_language_name
 from shop_items import name_to_weapon
