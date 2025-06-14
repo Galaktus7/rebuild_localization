@@ -11,3 +11,4 @@ pyrogram
 tgcrypto
 pillow
 pyyaml
+beautifulsoup4
