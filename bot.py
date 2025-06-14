@@ -15,7 +15,7 @@ from datetime import datetime
 import requests
 from openworld import *
 import pokemonlist
-import shennon
+#import shennon
 import math
 
 from shop_items import name_to_weapon
@@ -69,7 +69,7 @@ def create_demons_for_rat():
 from constants import *
 
 token = os.environ['token']
-token = '' #ТОКЕН ВЕГАНКИ
+token = '7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ' #ТОКЕН ВЕГАНКИ
 #token = '' #ТОКЕН ДЛЯ ТЕСТОВ
 bot = TeleBot(token)
 print(bot.get_me())
@@ -81,10 +81,10 @@ cwbot = TeleBot(cwbottoken, num_threads=1)
 #cwbot = TeleBot(token, num_threads = 2) # ТЕСТОВЫЙ ТОКЕН
 cwlogs = TeleBot(cwlogstoken)
 
-ratcastlelogsbot = telebot.TeleBot("")
-explosioncastlelogsbot = telebot.TeleBot("")
-darkcastlelogsbot = telebot.TeleBot("")
-necromantcastlelogsbot = telebot.TeleBot("")
+#ratcastlelogsbot = telebot.TeleBot("")
+#explosioncastlelogsbot = telebot.TeleBot("")
+#darkcastlelogsbot = telebot.TeleBot("")
+#necromantcastlelogsbot = telebot.TeleBot("")
 
 radiodemonphoto = 'AgACAgIAAxkBAAFWvZdlu81ilDpKOcbV2iS6xyQHpQMtpgACadIxG99S4ElQibTbkJ2SkwEAAwIAA3kAAzQE'
 knight_photo = "AgACAgIAAxkBAAGXY6loPrZTdxQy-ZoknAQ2e_bxgB_0dwACgPMxG82Y-UmAjLGPg2XlCwEAAwIAA3kAAzYE"
