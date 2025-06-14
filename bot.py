@@ -1049,7 +1049,7 @@ def castlefight_check():
         time.sleep(20)
 
 
-threading.Thread(target=castlefight_check, args=[]).start()
+#threading.Thread(target=castlefight_check, args=[]).start()
 
 bargames = {}
 
