@@ -21924,83 +21924,37 @@ def medit(message_text, chat_id, message_id, reply_markup=None, parse_mode=None,
                                  reply_markup=reply_markup, parse_mode=parse_mode)
 
 
-def poll(b):
-    b.infinity_polling()
-
-
-print('7777')
-
-
-def polll(b):
+def safe_send_error(msg):
     try:
-        b.infinity_polling()
+        bot.send_message(pasyuk_2_id, msg)
     except:
-        try:
-            b.send_message(pasyuk_id, traceback.format_exc())
-        except:
-            pass
+        print("[Ошибка при отправке traceback в личку]")
 
-
-# import mmmderevnya
-# import getip
-# import weather
-# try:
-#    import counter
-# except:
-#    print(traceback.format_exc())
-
-# threading.Thread(target = polll, args = [ukrus.bot]).start()
-# threading.Thread(target = polll, args = [mmmderevnya.bot]).start()
-# threading.Thread(target = polll, args = [mmmderevnya.bot101]).start()
-# threading.Thread(target = polll, args = [getip.bot]).start()
-# threading.Thread(target = polll, args = [weather.bot]).start()
-####################################### РАСКОММИТИТЬ ##################################################################
-####################################### РАСКОММИТИТЬ ##################################################################
-####################################### РАСКОММИТИТЬ ##################################################################
-
-####################################### РАСКОММИТИТЬ ##################################################################
-####################################### РАСКОММИТИТЬ ##################################################################
-####################################### РАСКОММИТИТЬ ##################################################################
-# try:
-#    threading.Thread(target = polll, args = [counter.bot]).start()
-# except:
-#    print(traceback.format_exc())
-
-# try:
-#   import cw_map_draw
-#    threading.Thread(target = polll, args = [cw_map_draw.bot]).start()
-# except:
-#    sendm(cwbot, pasyuk_id, traceback.format_exc())
-
-####################################### РАСКОММИТИТЬ ##################################################################
-####################################### РАСКОММИТИТЬ ##################################################################
-####################################### РАСКОММИТИТЬ ##################################################################
-try:
-    threading.Thread(target=polll, args=[bot]).start()
-except:
-    print(traceback.format_exc())
-    try:
-        sendm(bot, pasyuk_id, traceback.format_exc())
-    except:
-        pass
-
+# Дополнительные службы, без polling
 def start_addition_bots():
-    threading.Thread(target=checks_cw, args=[]).start()
-    threading.Thread(target=polll, args=[cwbot]).start()
-    threading.Thread(target=polll, args=[shennon.bot]).start()
-    import buckshot
-    threading.Thread(target=polll, args=[buckshot.bot]).start()
-    import random_events_alice
-    import popusk
-    threading.Thread(target=polll, args=[random_events_alice.bot]).start()
-    threading.Thread(target=polll, args=[popusk.bot]).start()
-    import debilikambodja
-    threading.Thread(target=polll, args=[debilikambodja.bot]).start()
+    try:
+        threading.Thread(target=checks_cw, args=[]).start()
+        # ❗ polling других ботов НЕ запускаем
+        # ❗ только logic-потоки или вызовы функций
 
-    from parser.battle_log_reader import start_parser
-    start_parser()
+        # Запуск логического парсера (если есть)
+        start_parser()
 
-start_addition_bots()
+    except Exception:
+        error_text = traceback.format_exc()
+        print(error_text)
+        safe_send_error(error_text)
+
+# Основной хендлер
+@bot.message_handler(commands=["start"])
+def handle_start(message):
+    bot.send_message(message.chat.id, "Бот веганки активен 🌱")
+
+# Финальный запуск
+if __name__ == "__main__":
+    print("[bot.py] Запуск доп. логики и основного polling...")
+    start_addition_bots()
+    bot.infinity_polling()
 
 ####################################### РАСКОММИТИТЬ ##################################################################
 ####################################### РАСКОММИТИТЬ ##################################################################
