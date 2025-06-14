@@ -17,12 +17,18 @@ from openworld import *
 import pokemonlist
 #import shennon
 import math
-from Lan import lt
-from config import bot
 from shop_items import name_to_weapon
 from chatwars import cw_skillinfo, cw_weaponlist
 from chatwars.utils import *
 from chatwars.db import CWDatabase
+
+
+
+from Lan import lt
+from config import *
+
+
+
 
 def sendm(b, chat_id, text, parse_mode=None, entities=None,
     disable_web_page_preview=None, disable_notification=None, protect_content= None, reply_to_message_id= None,
@@ -69,7 +75,7 @@ def create_demons_for_rat():
 from constants import *
 
 #token = os.environ['token']
-token = '7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ' #ТОКЕН ВЕГАНКИ
+
 #token = '' #ТОКЕН ДЛЯ ТЕСТОВ
 #bot = TeleBot(token)
 #print(bot.get_me())
@@ -93,7 +99,7 @@ knight_photo = "AgACAgIAAxkBAAGXY6loPrZTdxQy-ZoknAQ2e_bxgB_0dwACgPMxG82Y-UmAjLGP
 # ВСЯК СЮДА ВХОДЯЩИЙ
 
 
-client = MongoClient(os.environ['database2'])
+client = MongoClient(database2)
 db = client.veganwars_rebuild
 users = db.users
 duelstats = db.duelstats
@@ -21989,24 +21995,6 @@ except:
         sendm(bot, pasyuk_id, traceback.format_exc())
     except:
         pass
-
-def start_addition_bots():
-    threading.Thread(target=checks_cw, args=[]).start()
-    threading.Thread(target=polll, args=[cwbot]).start()
-    threading.Thread(target=polll, args=[shennon.bot]).start()
-    import buckshot
-    threading.Thread(target=polll, args=[buckshot.bot]).start()
-    import random_events_alice
-    import popusk
-    threading.Thread(target=polll, args=[random_events_alice.bot]).start()
-    threading.Thread(target=polll, args=[popusk.bot]).start()
-    import debilikambodja
-    threading.Thread(target=polll, args=[debilikambodja.bot]).start()
-
-    from parser.battle_log_reader import start_parser
-    start_parser()
-
-start_addition_bots()
 
 ####################################### РАСКОММИТИТЬ ##################################################################
 ####################################### РАСКОММИТИТЬ ##################################################################

@@ -1,103 +1,208 @@
-
-import os
+from telebot import types
 import json
-import yaml
+import os
+
 from pathlib import Path
-from telebot.types import Message
+
 from telebot import TeleBot
 
-from Localization.localization_loader import load_locales_from_folder
+from Localization.localization_loader import load_locales_from_folder, load_localization_file
+
 # Если хочешь использовать через бота — импортируй его
 from config import bot
 Alex_id = 1346718456
-user_language = {}  # user_id: "ru" / "uz"
-
-# Настройка: какие файлы подключать
-from pathlib import Path
-
-def find_language_files(suffix):
-    return [f.name for f in Path("Localization").glob(f"*_{suffix}.yaml")]
-
-language_files = {
-    "ru": find_language_files("ru"),
-    "uz": find_language_files("uz")
+# ========================== Отображаемые имена языков (с флагами) ==========================
+language_display_names = {
+    "русский": "🇷🇺Русский",
+    "английский": "🇬🇧English",
+    "украинский": "🇺🇦Українська",
 }
 
-def load_json(path: Path) -> dict:
-    if not path.exists():
-        return {}
-    with open(path, 'r', encoding='utf-8') as f:
-        return json.load(f)
+# ========================== Локализация текстов из JSON ==========================
 
-def load_yaml(path: Path) -> dict:
-    if not path.exists():
-        return {}
-    with open(path, 'r', encoding='utf-8') as f:
-        return yaml.safe_load(f)
+class LocalizedString:
+    def __init__(self, key: str, format_queue=None):
+        self.key = key
+        self.__format_queue = format_queue or []
 
-def save_json(data: dict, path: Path):
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    def __str__(self):
+        return self.localize()
 
-def save_yaml(data: dict, path: Path):
-    with open(path, 'w', encoding='utf-8') as f:
-        yaml.dump(data, f, allow_unicode=True, sort_keys=False)
+    def localize(self, code: str = "ru"):
+        string = translator.get_string(self.key, code)
+        if string is None:
+            string = self.key
+        for fmt in self.__format_queue:
+            string = fmt(string)
+        return string
 
-def load_localization_file(path: str) -> dict:
-    ext = os.path.splitext(path)[1].lower()
-    p = Path(path)
-    if ext == ".json":
-        return load_json(p)
-    elif ext in [".yaml", ".yml"]:
-        return load_yaml(p)
+    def format(self, *args, **kwargs):
+        def fmt(s): return s.format(*args, **kwargs)
+        copy = LocalizedString(self.key, self.__format_queue.copy())
+        copy.__format_queue.append(fmt)
+        return copy
+
+
+class Translator:
+    def __init__(self, default_locale="ru"):
+        self.locales = {}
+
+    def load_locale(self, code, *paths):
+        self.locales.setdefault(code, {})
+        for p in paths:
+            try:
+                self.locales[code].update(load_localization_file(p))
+            except Exception as e:
+                print(f"[Translator] Failed to load {p}: {e}")
+
+    def get_string(self, key, code):
+        return self.locales.get(code, {}).get(key)
+
+
+def auto_load_locales(translator, base_dir="Localization"):
+    base = Path(base_dir)
+    files = list(base.glob("*.*")) + list(base.rglob("*.*"))  # добавляем и корень, и вложенные
+
+    seen = set()
+    language_buckets = {}
+
+    for file in files:
+        if file.suffix.lower() not in [".yaml", ".yml", ".json"]:
+            continue
+
+        if file in seen:
+            continue
+        seen.add(file)
+
+        name_without_ext = file.stem  # имя файла без расширения
+        lang_code = name_without_ext.split("_")[-1].lower()  # берём последний элемент после "_"
+
+        language_buckets.setdefault(lang_code, []).append(str(file))
+
+    for lang_code, paths in language_buckets.items():
+        translator.load_locale(lang_code, *paths)
+
+
+
+# Используем авто-загрузку
+translator = Translator()
+auto_load_locales(translator, base_dir="Localization")
+
+
+user_language_preferences = {}
+chat_language_preferences = {}
+
+
+def lt(target_id: int, key: str, force_lang: str = None) -> str:
+    if force_lang:
+        code = force_lang
     else:
-        raise ValueError(f"Unsupported file format: {ext}")
+        lang = (chat_language_preferences.get(target_id, "русский")
+                if target_id < 0 else
+                user_language_preferences.get(target_id, "русский"))
+        code = {"русский": "ru", "английский": "en", "украинский": "uk"}.get(lang, "ru")
+    return LocalizedString(key).localize(code)
 
-# Загружаем всё в один словарь
-def load_language(lang_code: str) -> dict:
-    result = {}
-    for file in language_files.get(lang_code, []):
-        path = Path("Localization") / file
-        if path.exists():
-            data = load_localization_file(str(path))
-            if isinstance(data, dict):
-                result.update(data)
-    return result
 
-# Загрузка всех языков
-localizations = {
-    lang: load_language(lang)
-    for lang in language_files
-}
+def localized_language_name(lang_key: str) -> str:
+    return language_display_names.get(lang_key, language_display_names["русский"])
 
-# Получение языка пользователя (по умолчанию — ru)
-def get_lang(user_id: int) -> str:
-    return user_language.get(user_id, "ru")
+# ========================== Проверка админа ==========================
 
-# Получение локализованной строки
-def lt(user_id: int, key: str, default: str = "") -> str:
-    lang = get_lang(user_id)
-    return localizations.get(lang, {}).get(key, default)
 
-# Для отладки/информирования
-def localized_language_name(code: str) -> str:
-    return {
-        "ru": "Русский 🇷🇺",
-        "uz": "O‘zbek 🇺🇿"
-    }.get(code, code)
+def is_user_admin(chat_id, user_id):
+    if user_id == Alex_id:
+        return True
+    try:
+        return bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator")
+    except:
+        return False
 
-# Команда для установки языка
+# ========================== /admin_locale ==========================
+
 @bot.message_handler(commands=["admin_locale"])
-def set_locale(message: Message):
-    uid = message.from_user.id
-    args = message.text.split()
-    if len(args) < 2:
-        bot.reply_to(message, "Пример: /admin_locale ru или /admin_locale uz")
-        return
-    lang = args[1].strip().lower()
-    if lang not in localizations:
-        bot.reply_to(message, f"Язык '{lang}' не поддерживается.")
-        return
-    user_language[uid] = lang
-    bot.reply_to(message, f"✅ Установлен язык: {localized_language_name(lang)}")
+def admin_set_language(message):
+    user_id = message.from_user.id
 
+    if message.chat.type == "private":
+        bot.reply_to(message, lt(user_id, "only_in_groups"))
+        return
+
+    chat_id = message.chat.id
+    if not is_user_admin(chat_id, user_id):
+        bot.reply_to(message, lt(user_id, "only_admin"))
+        return
+
+    current = chat_language_preferences.get(chat_id, "русский")
+
+    # Строим inline-клавиатуру с флагами
+    kb = types.InlineKeyboardMarkup()
+    for key in ["русский", "английский", "украинский"]:
+        kb.add(types.InlineKeyboardButton(
+            text=localized_language_name(key),
+            callback_data=f"adminset_{key}"
+        ))
+
+    # Текст заголовка локализуем по чату
+    bot.reply_to(
+        message,
+        lt(chat_id, "current_group_language")
+           .format(lang=localized_language_name(current)),
+        reply_markup=kb
+    )
+
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith("adminset_"))
+def handle_admin_language_buttons(call):
+
+    chat_id = call.message.chat.id
+    user_id  = call.from_user.id
+    username = call.from_user.username or ""
+
+    if not is_user_admin(chat_id, user_id):
+        bot.answer_callback_query(call.id, lt(user_id, "only_admin"))
+        return
+
+    selected = call.data.split("_", 1)[1].lower()
+    chat_language_preferences[chat_id] = selected
+
+    # Подтверждение по чату
+    bot.answer_callback_query(
+        call.id,
+        lt(chat_id, "group_language_set")
+           .format(lang=localized_language_name(selected))
+    )
+    bot.edit_message_text(
+        chat_id=chat_id,
+        message_id=call.message.message_id,
+        text=lt(chat_id, "current_group_language_set").format(lang=localized_language_name(selected))
+    )
+
+    if selected == "украинский":
+        bot.send_message(chat_id, lt(chat_id, "ua_gratitude"))
+
+
+# ========================== /set_l ==========================
+
+
+@bot.message_handler(commands=["set_l"])
+def set_language(message):
+    if message.chat.type != "private":
+        bot.reply_to(message, lt(message.chat.id, "private_only_language_change"))
+        return
+
+    user_id = message.from_user.id
+    current = user_language_preferences.get(user_id, "русский")
+
+    kb = types.InlineKeyboardMarkup()
+    for key in ["русский", "английский", "украинский"]:
+        kb.add(types.InlineKeyboardButton(
+            text=localized_language_name(key),
+            callback_data=key
+        ))
+
+    bot.send_message(
+        user_id,
+        lt(user_id, "current_user_language").format(lang=localized_language_name(current)),
+        reply_markup=kb
+    )

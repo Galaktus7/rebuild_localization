@@ -1,5 +1,17 @@
-from telebot import TeleBot
-# Только основной токен веганки
-BOT_TOKEN = "7761726947:AAGOpSlfreC-GPanhCb89Vs5hS4vafxV0RQ"
-# Создание бота
-bot = TeleBot(BOT_TOKEN)
+import telebot
+import os
+
+BOT_TOKEN = os.environ['BOT_TOKEN']
+bot = telebot.TeleBot(BOT_TOKEN)
+
+cwbottoken = os.environ['CW_BOT_TOKEN']
+cwbottoken_bot = telebot.TeleBot(cwbottoken)
+
+cwlogstoken = os.environ['CW_LOGS_TOKEN']
+cwlogstoken_bot = telebot.TeleBot(cwlogstoken)
+
+testbot = os.environ['TEST_BOT_TOKEN']
+testbot_bot = telebot.TeleBot(testbot)
+
+database = os.environ['MONGO_DB']
+database2 = os.environ['MONGO_DB_2']

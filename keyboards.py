@@ -7,7 +7,10 @@ import weaponlist
 import threading
 import os
 from pymongo import MongoClient
-client=MongoClient(os.environ['database2'])
+
+from config import database, database2
+
+client = MongoClient(database2)
 db=client.veganwars_rebuild
 users=db.users
 

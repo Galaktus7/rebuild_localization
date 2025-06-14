@@ -7,8 +7,6 @@ import telebot
 import os
 from config import bot
 
-testbot = telebot.TeleBot('8080452545:AAF2XQ1QZugaMgoihO3LJHpVHIe6SMf1Dso')
-
 def npcact_fullneural(game, player):
     for ids in game['players']:
         if game['players'][ids]['id'] != player['id']:
