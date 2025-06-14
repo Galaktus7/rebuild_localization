@@ -8,7 +8,7 @@ from telebot import TeleBot
 
 from Localization.localization_loader import load_locales_from_folder
 # Если хочешь использовать через бота — импортируй его
-from Config import bot
+from config import bot
 Alex_id = 1346718456
 user_language = {}  # user_id: "ru" / "uz"
 
