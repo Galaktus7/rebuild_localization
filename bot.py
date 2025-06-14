@@ -7848,22 +7848,28 @@ def delgame(m):
 @bot.message_handler(commands=['v_prepare'])
 def startgame(m):
     if not allowgames:
-        sendm(bot, m.chat.id, 'Проводятся технические работы, игры временно недоступны!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'games_disabled'))
         return
+
     if m.chat.id not in games:
         game = creategame(m)
         games.update(game)
         game = games[m.chat.id]
+
         if spectateallgames:
             if game['id'] != pasyuk_id:
                 game['spectators'].append(pasyuk_id)
+
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id, 'Подготовка к игре запущена! /v_join для присоединения, /v_go для запуска.')
+
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_preparing'))
+
     else:
-        sendm(bot, m.chat.id, 'В этом чате уже есть игра!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_already_exists'))
         return
+
 
 
 @bot.message_handler(commands=['duel_rules'])
