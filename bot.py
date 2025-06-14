@@ -17,7 +17,7 @@ from openworld import *
 import pokemonlist
 #import shennon
 import math
-import Lan
+from Lan import lt
 from config import bot
 from shop_items import name_to_weapon
 from chatwars import cw_skillinfo, cw_weaponlist
