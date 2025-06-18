@@ -681,14 +681,14 @@ def gettargetkb(game, player, calldata, targettype = 'enemy', sniper = False, on
                             if allowhit:
                                 nkb.append(types.InlineKeyboardButton(text = target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])))
                             if allowthrow:
-                                nkb.append(types.InlineKeyboardButton(text = 'Метнуть', callback_data = 'fightact?'+str(game['id'])+'?'+'narsil'+'?'+str(target['id'])))
+                                nkb.append(types.InlineKeyboardButton(text = lt(player['id'], 'narsil'), callback_data = 'fightact?'+str(game['id'])+'?'+'narsil'+'?'+str(target['id'])))
                             kb.add(*nkb)
 
                         else:
                             if target['id'] in player['nearplayers']:
                                 if player['weapon'].name == 'Кувалда' and player['sokrusheniecd'] <= 0 and player['energy'] >= 4:
                                     kb.add(types.InlineKeyboardButton(text = em+target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])),
-                                    types.InlineKeyboardButton(text = 'Сокрушить', callback_data = 'fightact?'+str(game['id'])+'?'+'sokrush'+'?'+str(target['id'])))
+                                    types.InlineKeyboardButton(text = lt(player['id'], 'sokrush'), callback_data = 'fightact?'+str(game['id'])+'?'+'sokrush'+'?'+str(target['id'])))
 
                                 elif player['weapon'].name == 'Молот' and player['molotcd'] <= 0 and player['energy'] >= 4:
                                     kb.add(types.InlineKeyboardButton(text = em+target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])),
