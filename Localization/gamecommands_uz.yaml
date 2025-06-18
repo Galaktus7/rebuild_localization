@@ -1,1 +1,3 @@
-
+games_disabled: "Texnik ishlar olib borilmoqda, o'yinlar vaqtincha mavjud emas!"
+game_preparing: "O'yin tayyorlanmoqda! /v_join orqali qo'shiling, /v_go orqali boshlang."
+game_already_exists: "Bu chatda allaqachon o'yin bor!"
