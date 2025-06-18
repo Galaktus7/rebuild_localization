@@ -6,7 +6,7 @@ import json
 import os
 import telebot
 
-bot = telebot.TeleBot('5138686837:AAFenZZn4mKaIPisV-XsATZgmWQX52zzHYc')
+bot = telebot.TeleBot('')
 
 allow = [441399484, 524034660]
 
