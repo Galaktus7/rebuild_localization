@@ -256,13 +256,13 @@ def getskillkb(game, player):
             x = ids
             kb.add(types.InlineKeyboardButton(text=getname(x),
                    callback_data='selectskill?' + str(game['id']) + '?' + str(x)+"?te%"),
-                   types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                   types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
     if game['testequipgame_tournier']:
         for ids in skills2:
             x = ids
             kb.add(types.InlineKeyboardButton(text=getname(x),
                    callback_data='selectskill?' + str(game['id']) + '?' + str(x)+"?te%"),
-                   types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                   types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
     else:
         if game['classic_game']:
             skills2 = skills_classic.copy()
@@ -299,24 +299,24 @@ def getskillkb(game, player):
                 if player['id'] in has_dragon_power and allow_dp and random.randint(1, 100) <= 10 and "dragon_power" not in s:
                     x = "dragon_power"
             kb.add(types.InlineKeyboardButton(text = getname(x), callback_data = 'selectskill?'+str(game['id'])+'?'+str(x)),
-                  types.InlineKeyboardButton(text = 'Информация', callback_data = 'getskillinfo?'+str(x)))
+                  types.InlineKeyboardButton(text = lt(player['id'], 'info_button'), callback_data = 'getskillinfo?'+str(x)))
             s.append(x)
         if player['id'] in has_dark_energy and game['dungeon_type'] == 'hell' and game['dungeonlvl'] == 3:
             x = 'dark_energy'
             kb.add(types.InlineKeyboardButton(text=getname(x),
                                               callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                   types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                   types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
         if player['id'] in has_charge and game['dungeon_type'] == 'hell' and game['dungeonlvl'] == 3 and 'charge' not in s:
             x = 'charge'
             kb.add(types.InlineKeyboardButton(text=getname(x),
                                               callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                   types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                   types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
     if not game['classic_game']:
         if player['id'] == 253478906:
             x = 'elmo'
             if 'elmo' not in player['skills'] and not game['tournier']:
                 kb.add(types.InlineKeyboardButton(text = getname(x), callback_data = 'selectskill?'+str(game['id'])+'?'+str(x)),
-                  types.InlineKeyboardButton(text = 'Информация', callback_data = 'getskillinfo?'+str(x)))
+                  types.InlineKeyboardButton(text = lt(player['id'], 'info_button'), callback_data = 'getskillinfo?'+str(x)))
         #if player['id'] == 1134827568:
         #    x = 'demon'
         #    if 'demon' not in player['skills'] and not game['tournier']:
@@ -335,7 +335,7 @@ def getskillkb(game, player):
                     if can_pick_bomber and 'bomber' not in player['skills']:
                         kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                            types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                            types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
                 if game['dungeon_type'] == 'ghoul':
                     for ids in game['players']:
                         if game['players'][ids]['controller'] != 'bot' and game['players'][ids]['id'] not in has_necrostaff:
@@ -344,12 +344,12 @@ def getskillkb(game, player):
                     if can_pick_bomber and 'bomber' not in player['skills']:
                         kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                            types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                            types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
             else:
                 if 'bomber' not in player['skills'] and not game['tournier'] and not game['dungeon']:
                     kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                           types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                           types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
 
 
         if player['id'] in has_miner:
@@ -364,7 +364,7 @@ def getskillkb(game, player):
                     if can_pick_miner and 'miner' not in player['skills']:
                         kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                            types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                            types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
                 if game['dungeon_type'] == 'ghoul':
                     for ids in game['players']:
                         if game['players'][ids]['controller'] != 'bot' and game['players'][ids]['id'] not in has_necrostaff:
@@ -373,12 +373,12 @@ def getskillkb(game, player):
                     if can_pick_miner and 'miner' not in player['skills']:
                         kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                            types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                            types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
             else:
                 if 'miner' not in player['skills'] and not game['tournier'] and not game['dungeon']:
                     kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                           types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                           types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
 
         if player['id'] in has_doom:
             x = 'doom'
@@ -392,7 +392,7 @@ def getskillkb(game, player):
                     if can_pick_doom and 'doom' not in player['skills']:
                         kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                            types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                            types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
                 if game['dungeon_type'] == 'ghoul':
                     for ids in game['players']:
                         if game['players'][ids]['controller'] != 'bot' and game['players'][ids]['id'] not in has_necrostaff:
@@ -401,12 +401,12 @@ def getskillkb(game, player):
                     if can_pick_doom and 'doom' not in player['skills']:
                         kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                            types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                            types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
             else:
                 if 'doom' not in player['skills'] and not game['tournier'] and not game['dungeon']:
                     kb.add(types.InlineKeyboardButton(text=getname(x),
                                                       callback_data='selectskill?' + str(game['id']) + '?' + str(x)),
-                           types.InlineKeyboardButton(text='Информация', callback_data='getskillinfo?' + str(x)))
+                           types.InlineKeyboardButton(text=lt(player['id'], 'info_button'), callback_data='getskillinfo?' + str(x)))
 
 
     #if player['id'] in has_charge:
@@ -418,12 +418,12 @@ def getskillkb(game, player):
         if not game['g']:
             x = 'gurren'
             kb.add(types.InlineKeyboardButton(text = 'ГУРРЕН', callback_data = 'selectskill?'+str(game['id'])+'?'+str(x)),
-                types.InlineKeyboardButton(text = 'Информация', callback_data = 'getskillinfo?'+str(x)))
+                types.InlineKeyboardButton(text = 'lt(player['id'], 'info_button')', callback_data = 'getskillinfo?'+str(x)))
             game['g'] = True
         else:
             x = 'lagann'
             kb.add(types.InlineKeyboardButton(text = 'ЛАГАНН', callback_data = 'selectskill?'+str(game['id'])+'?'+str(x)),
-                types.InlineKeyboardButton(text = 'Информация', callback_data = 'getskillinfo?'+str(x)))
+                types.InlineKeyboardButton(text = 'lt(player['id'], 'info_button')', callback_data = 'getskillinfo?'+str(x)))
     
     return kb
   
@@ -468,36 +468,36 @@ def getfightkb(game, player):
     for ids in player['frozen_buttons']:
         frozen_buttons.append(ids[0])
     if "attack" not in frozen_buttons:
-        attacktext = 'Атака'
+        attacktext = lt(player['id'], 'attack_button')
         attackcalldata = 'fightact?'+str(game['id'])+'?attackselect'
     else:
-        attacktext = '(🔒)Атака'
+        attacktext = lt(player['id'], 'attack_button2')
         attackcalldata = 'fightact?' + str(game['id']) + '?frozen_act'
     if "perekat" not in frozen_buttons:
-        perekattext = 'Перекат'
+        perekattext = lt(player['id'], 'perekat_button')
         perekatcalldata = 'fightact?'+str(game['id'])+'?perekat'
     else:
-        perekattext = '(🔒)Перекат'
+        perekattext = lt(player['id'], 'perekat_button2')
         perekatcalldata = 'fightact?' + str(game['id']) + '?frozen_act'
     if "addition" not in frozen_buttons and len(player['doomedskills']) == 0:
-        additiontext = 'Дополнительно'
+        additiontext = lt(player['id'], 'addition_button')
         additioncalldata = 'fightact?'+str(game['id'])+'?addition'
     else:
-        additiontext = '(🔒)Дополнительно'
+        additiontext = lt(player['id'], 'addition_button2')
         additioncalldata = 'fightact?' + str(game['id']) + '?frozen_act'
     if 'robot' not in player['skills']:
         if "reload" not in frozen_buttons:
-            reloadtext = 'Перезарядка'
+            reloadtext = lt(player['id'], 'reload_button')
             reloadcalldata = 'fightact?' + str(game['id']) + '?reload'
         else:
-            reloadtext = '(🔒)Перезарядка'
+            reloadtext = lt(player['id'], 'reload_button2')
             reloadcalldata = 'fightact?' + str(game['id']) + '?frozen_act'
         if player['weapon'].name == 'Дробовик' and player['drobovik_charges'] <= 0:
             if not player['fell']:
                 
                 kb.add(types.InlineKeyboardButton(text=reloadtext, callback_data=reloadcalldata))
             else:
-                kb.add(types.InlineKeyboardButton(text='Подняться',
+                kb.add(types.InlineKeyboardButton(text=lt(player['id'], 'fell_button'),
                                                   callback_data='fightact?' + str(game['id']) + '?standup'),
                        types.InlineKeyboardButton(text=reloadtext,
                                                   callback_data=reloadcalldata))
@@ -513,34 +513,34 @@ def getfightkb(game, player):
                     kb.add(types.InlineKeyboardButton(text = attacktext, callback_data = attackcalldata),
                         types.InlineKeyboardButton(text = reloadtext, callback_data = reloadcalldata))
             else:
-                kb.add(types.InlineKeyboardButton(text = 'Подняться', callback_data = 'fightact?'+str(game['id'])+'?standup'),
+                kb.add(types.InlineKeyboardButton(text = lt(player['id'], 'standup_button'), callback_data = 'fightact?'+str(game['id'])+'?standup'),
                     types.InlineKeyboardButton(text = reloadtext, callback_data = reloadcalldata))
     else:
         kb.add(types.InlineKeyboardButton(text = attacktext, callback_data = attackcalldata),
-           types.InlineKeyboardButton(text = 'Охлаждение', callback_data = 'fightact?'+str(game['id'])+'?reload'))
+           types.InlineKeyboardButton(text = lt(player['id'], 'oxlajdenie_button'), callback_data = 'fightact?'+str(game['id'])+'?reload'))
     if player['droppedweapon'] != None:
-        kb.add(types.InlineKeyboardButton(text = 'Поднять оружие', callback_data = 'fightact?'+str(game['id'])+'?pickupweapon'))
+        kb.add(types.InlineKeyboardButton(text = lt(player['id'], 'pickupweapon_button'), callback_data = 'fightact?'+str(game['id'])+'?pickupweapon'))
     if player['weapon'].name == 'Гранатомет':
-        kb.add(types.InlineKeyboardButton(text = 'Граната: '+getname(player['grenade']), callback_data = 'fightact?'+str(game['id'])+'?grenadeselect'))
+        kb.add(types.InlineKeyboardButton(text = lt(player['id'], 'grenadeselect')+getname(player['grenade']), callback_data = 'fightact?'+str(game['id'])+'?grenadeselect'))
     if player['perekatcd'] <= 0 and not player['fell']:
         kb.add(types.InlineKeyboardButton(text = perekattext, callback_data = perekatcalldata),
-          types.InlineKeyboardButton(text = 'Инфо', callback_data = 'fightact?'+str(game['id'])+'?info'))
+          types.InlineKeyboardButton(text = lt(player['id'], 'info'), callback_data = 'fightact?'+str(game['id'])+'?info'))
     else:
-        kb.add(types.InlineKeyboardButton(text = 'Инфо', callback_data = 'fightact?'+str(game['id'])+'?info'))
+        kb.add(types.InlineKeyboardButton(text = lt(player['id'], 'info'), callback_data = 'fightact?'+str(game['id'])+'?info'))
     
     kb.add(types.InlineKeyboardButton(text = additiontext, callback_data = additioncalldata))
     for ids in game['players']:
         target = game['players'][ids]
         if target['team'] != player['team'] and (target['id'] not in player['nearplayers'] or "dragon_power" in target["skills"] or target["is_dragon"]):
-            kb.add(types.InlineKeyboardButton(text = 'Подойти', callback_data = 'fightact?'+str(game['id'])+'?walk'))
+            kb.add(types.InlineKeyboardButton(text = lt(player['id'], 'walk'), callback_data = 'fightact?'+str(game['id'])+'?walk'))
             break
     if player['fireticks'] > 0:
-        text = 'Потушиться'
+        text = lt(player['id'], 'extinguish')
     else:
         if 'autist' not in player['skills']:
-            text = 'Пропустить'
+            text = lt(player['id'], 'skip')
         else:
-            text = 'Тупить'
+            text = lt(player['id'], 'tupit')
     skipcalldata = 'fightact?'+str(game['id'])+'?skip'
     if 'skip' in frozen_buttons:
         text = "(🔒)"+text
@@ -549,12 +549,12 @@ def getfightkb(game, player):
     
     if player['lasthit'] > 0:
         kb = types.InlineKeyboardMarkup()
-        kb.add(types.InlineKeyboardButton(text = 'Умереть', callback_data = 'fightact?'+str(game['id'])+'?die'))
+        kb.add(types.InlineKeyboardButton(text = lt(player['id'], 'die'), callback_data = 'fightact?'+str(game['id'])+'?die'))
 
     if player['darkness_sleep']:
         kb = types.InlineKeyboardMarkup()
-        kb.add(types.InlineKeyboardButton(text='Увернуться вправо', callback_data='fightact?' + str(game['id']) + '?perekat_right'),
-               types.InlineKeyboardButton(text='Увернуться влево', callback_data='fightact?' + str(game['id']) + '?perekat_left'))
+        kb.add(types.InlineKeyboardButton(text=lt(player['id'], 'perekat_right'), callback_data='fightact?' + str(game['id']) + '?perekat_right'),
+               types.InlineKeyboardButton(text=lt(player['id'], 'perekat_right'), callback_data='fightact?' + str(game['id']) + '?perekat_left'))
 
     return kb
 
@@ -588,7 +588,7 @@ def getbarkb(game, player):
                            types.InlineKeyboardButton(text=reloadtext, callback_data=reloadcalldata))
 
     kb.add(types.InlineKeyboardButton(text=perekattext, callback_data=perekatcalldata),
-               types.InlineKeyboardButton(text='Инфо', callback_data='fightact?' + str(game['id']) + '?info'))
+               types.InlineKeyboardButton(text=lt(player['id'], 'info'), callback_data='fightact?' + str(game['id']) + '?info'))
 
 
     kb.add(types.InlineKeyboardButton(text=additiontext, callback_data=additioncalldata))
