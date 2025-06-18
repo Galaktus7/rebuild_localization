@@ -605,12 +605,12 @@ def getbarkb(game, player):
 def getdarkkb(game, player):
     kb = types.InlineKeyboardMarkup()
     if game['dungeon']:
-        seetext = 'БЕЖАТЬ'
+        seetext = lt(player['id'], 'run')
     else:
         if 'dark_energy' in player['skills']:
-            seetext = 'БЕЖАТЬ'
+            seetext = lt(player['id'], 'run')
         else:
-            seetext = 'БЕЖАТЬ'
+            seetext = lt(player['id'], 'run')
     kb.add(types.InlineKeyboardButton(text=seetext, callback_data='fightact?' + str(game['id']) + '?run'),
                types.InlineKeyboardButton(text=seetext, callback_data='fightact?' + str(game['id']) + '?run'))
     if player['perekatcd'] <= 0 and not player['fell']:
@@ -626,12 +626,12 @@ def getdarkkb(game, player):
             kb.add(types.InlineKeyboardButton(text=seetext, callback_data='fightact?' + str(game['id']) + '?run'))
             break
     if player['fireticks'] > 0:
-        text = 'Потушиться'
+        text = lt(player['id'], 'extinguish')
     else:
         if 'autist' not in player['skills']:
-            text = 'Пропустить'
+            text = lt(player['id'], 'skip')
         else:
-            text = 'Тупить'
+            text = lt(player['id'], 'tupit')
     kb.add(types.InlineKeyboardButton(text=seetext, callback_data='fightact?' + str(game['id']) + '?run'))
 
     if player['lasthit'] > 0:
