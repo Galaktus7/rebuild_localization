@@ -418,12 +418,12 @@ def getskillkb(game, player):
         if not game['g']:
             x = 'gurren'
             kb.add(types.InlineKeyboardButton(text = 'ГУРРЕН', callback_data = 'selectskill?'+str(game['id'])+'?'+str(x)),
-                types.InlineKeyboardButton(text = 'lt(player['id'], 'info_button')', callback_data = 'getskillinfo?'+str(x)))
+                types.InlineKeyboardButton(text = lt(player['id'], 'info_button'), callback_data = 'getskillinfo?'+str(x)))
             game['g'] = True
         else:
             x = 'lagann'
             kb.add(types.InlineKeyboardButton(text = 'ЛАГАНН', callback_data = 'selectskill?'+str(game['id'])+'?'+str(x)),
-                types.InlineKeyboardButton(text = 'lt(player['id'], 'info_button')', callback_data = 'getskillinfo?'+str(x)))
+                types.InlineKeyboardButton(text = lt(player['id'], 'info_button'), callback_data = 'getskillinfo?'+str(x)))
     
     return kb
   
