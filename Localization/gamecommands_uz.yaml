@@ -1,3 +1,31 @@
 games_disabled: "Texnik ishlar olib borilmoqda, bu rejimdagi o'yinlar to'xtatilgan!"
 game_preparing: "O'yin uchun qabul boshlandi! /v_join orqali qo'shiling, /v_go orqali boshlang."
 game_already_exists: "Bu chatda allaqachon o'yin bor!"
+join1: "O'yin hali boshlanmagan (/prepare)!"
+join2: "O'yin allaqachon boshlangan!"
+join3: "Siz o'yinga allaqachon qo'shilgansiz!"
+join4: 'Kalamush bilan duel rejimida o'yinchilar limiti - 1!'
+join5: 'Duel rejimida o'yinchilar limiti - 2!'
+join6: 'Kalamush tutish uchun o'yinchilar limiti - 1!'
+join7: 'Эта игра - смертельная дуэль для ДВОИХ.'
+selectteam: 'Guruh tanlang.'
+firststart: "Avval botning lichkasiga yozing!"
+team_already_chosen: 'Siz guruh tanlab bo'lgansiz!'
+team_selected: "Siz quyidagi guruhni tanladingiz: {team}!"
+team_announcement: "{player} quyidagi guruhni tanladi: {team}!"
+toggle_text_instruction: "Нажмите на текст, чтобы включить/выключить его."
+flee1: "Siz o'yinda emassiz!"
+escaped: "{name} qochib ketti!"
+duel_rules: |
+  *Правила дуэли на рапирах:*
+  *1.* Рапира тратит 2 энергии за атаку. Рапира наносит 1 урон за каждые 2 единицы энергии атакующего, с округлением в большую сторону. Пример: имея 1 или 2 энергии, вы наносите 1 урон. 3 или 4 энергии - 2 урона. 5 или 6 энергии - 3 урона.
+  *2.* Если вам нанесли урона больше, чем нанесли вы, то соперник не теряет ХП от вашей атаки.
+  *3.* Если у вас 4 или меньше энергии, перекат соперника сработает, заставив вас промахнуться. Иначе снизит ваш урон на 2.
+  *4.* У каждого игрока из предметов есть адреналин и флэшка. Из способностей - генератор щитов и вор.
+  *5.* Перезарядка генератора щитов - 5 ходов, перезарядка переката - 5 ходов, перезарядка вора - 3 хода.
+  *6.* Сама по себе рапира не промахивается, хотя в меню персонажа написан шанс попадания. Шанс попадания рапиры по врагу - 100%, если тот не перекатывается и если у вас больше, чем 0 энергии. Если же враг перекатывается - смотрите пункт 3.
+pureduel_start: >
+  Подготовка к дуэли на рапирах запущена! /v_join для присоединения. 
+  Правила режима: /duel_rules. 
+  Командный режим: /v_pureduel_teams. 
+  Статистика по режиму: /v_stats_pureduels
