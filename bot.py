@@ -7555,30 +7555,30 @@ def cancelll(m):
 @bot.message_handler(commands=['v_join'])
 def join(m):
     if m.chat.id not in games:
-        sendm(bot, m.chat.id, 'Игра ещё не была создана (/v_prepare)!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join1'))
         return
     game = games[m.chat.id]
     if game['started'] == True:
-        sendm(bot, m.chat.id, 'Игра уже в процессе!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join2'))
         return
     if m.from_user.id in game['players']:
-        sendm(bot, m.chat.id, 'Вы уже в игре!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join3'))
         return
     user = users.find_one({'id': m.from_user.id})
     if user == None:
         users.insert_one(createuser2(m.from_user))
         user = users.find_one({'id': m.from_user.id})
     if game['pureduel_rats'] and len(game['players']) >= 1:
-        sendm(bot, m.chat.id, 'Лимит игроков для дуэли с крысой - 1!', reply_to_message_id=m.message_id)
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join4'), reply_to_message_id=m.message_id)
         return
     if game['pureduel'] and len(game['players']) >= 2 and not game['teamplay']:
-        sendm(bot, m.chat.id, 'Лимит игроков для дуэли - 2!', reply_to_message_id=m.message_id)
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join5'), reply_to_message_id=m.message_id)
         return
     if game['pokemonhunt'] and len(game['players']) >= 1:
-        sendm(bot, m.chat.id, 'Лимит игроков для ловли крыс - 1!', reply_to_message_id=m.message_id)
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join6'), reply_to_message_id=m.message_id)
         return
     if game['dungeon'] and game['dungeon_type'] == 'roulette' and len(game['players']) >= 1:
-        sendm(bot, m.chat.id, 'Эта игра - смертельная дуэль для ДВОИХ.', reply_to_message_id=m.message_id)
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join7'), reply_to_message_id=m.message_id)
         return
     if game['rp_fight']:
         try:
@@ -7647,12 +7647,12 @@ def join(m):
             kb.add(types.InlineKeyboardButton(text=teams[1]['name'] + ' - ' + str(team2),
                                               callback_data='selectteam?' + str(game['id']) + '?' + str(
                                                   teams[1]['id'])))
-            sendm(bot, m.from_user.id, 'Выберите команду.', reply_markup=kb)
+            sendm(bot, m.from_user.id, lt(m.from_user.id, 'selectteam'), reply_markup=kb)
         else:
             player['team'] = player['id']
 
     except:
-        sendm(bot, m.chat.id, 'Для начала напишите боту в ЛС!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'firststart'))
 
 @bot.message_handler(commands=['give_dark'])
 def giveDARKrewarddd(m):
@@ -7689,7 +7689,7 @@ def selectteam(call):
         return
     player = game['players'][call.from_user.id]
     if player['team'] != None:
-        bot.answer_callback_query(call.id, 'Вы уже выбрали команду!')
+        bot.answer_callback_query(call.id, lt(player['id'], 'team_already_chosen'))
         return
     team_exists = False
     for ids in game['players']:
@@ -7701,8 +7701,8 @@ def selectteam(call):
         return
     player['team'] = team
     player2 = game['players'][team]
-    medit('Вы успешно выбрали команду: ' + player2['name'] + '!', call.message.chat.id, call.message.message_id)
-    sendm(bot, game['id'], player['name'] + ' выбирает команду: ' + player2['name'] + '!')
+    medit(lt(player['id'], 'team_selected').format(team=player2['name']), call.message.chat.id, call.message.message_id)
+    sendm(bot, game['id'], lt(player['id'], 'team_announcement').format(player=player['name'], team=player2['name']))
 
 @bot.message_handler(commands = ['removerhino'])
 def removerrr(m):
@@ -7726,8 +7726,8 @@ def switchteextss(call):
     user['customtexts'][text] = not user['customtexts'][text]
     bot.answer_callback_query(call.id, '✅')
     kb = getswitchkb(user)
-    medit('Нажмите на текст, чтобы включить/выключить его.', call.message.chat.id, call.message.message_id,
-          reply_markup=kb)
+    medit(lt(call.from_user.id, 'toggle_text_instruction'), call.message.chat.id, call.message.message_id, reply_markup=kb)
+
 
 
 def getswitchkb(user):
@@ -7755,7 +7755,7 @@ def selecttexts(m):
     except:
         users.update_one({'id': user['id']}, {'$set': {'customtexts': {}}})
     kb = getswitchkb(user)
-    sendm(bot, m.chat.id, 'Нажмите на текст, чтобы включить/выключить его.', reply_markup=kb)
+    sendm(bot, m.chat.id, lt(m.from_user.id, 'toggle_text_instruction'), reply_markup=kb)
 
 
 @bot.message_handler(commands=['givetext'])
@@ -7787,14 +7787,14 @@ def givetextt(m):
 @bot.message_handler(commands=['flee'])
 def fleee(m):
     if m.chat.id not in games:
-        sendm(bot, m.chat.id, 'Игра ещё не была создана (/v_prepare)!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join1'))
         return
     game = games[m.chat.id]
     if game['started'] == True:
-        sendm(bot, m.chat.id, 'Игра уже в процессе!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'join2'))
         return
     if m.from_user.id not in game['players']:
-        sendm(bot, m.chat.id, 'Вы не в игре!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'flee1'))
         return
     del game['players'][m.from_user.id]
     newleaderchoice = []
@@ -7808,7 +7808,7 @@ def fleee(m):
             player = game['players'][ids]
             if player['team'] == m.from_user.id:
                 player['team'] = newleader
-    sendm(bot, m.chat.id, m.from_user.first_name + ' сбежал!')
+    sendm(bot, m.chat.id, lt(m.from_user.id, 'escaped').format(name=m.from_user.first_name))
 
 
 @bot.message_handler(commands=['del_game'])
@@ -7880,22 +7880,14 @@ def startgame(m):
 
 @bot.message_handler(commands=['duel_rules'])
 def duelrules(m):
-    text = ''
-    text += '*Правила дуэли на рапирах:*\n\n*1.* Рапира тратит 2 энергии за атаку. Рапира наносит 1 урон за каждые 2 единицы энергии атакующего, с округлением '
-    text += 'в большую сторону. Пример: имея 1 или 2 энергии, вы наносите 1 урон. 3 или 4 энергии - 2 урона. 5 или 6 энергии - 3 урона.\n\n'
-    text += '*2.* Если вам нанесли урона больше, чем нанесли вы, то соперник не теряет ХП от вашей атаки.\n\n'
-    text += '*3.* Если у вас 4 или меньше энергии, перекат соперника сработает, заставив вас промахнуться. Иначе снизит ваш урон на 2.\n\n'
-    text += '*4.* У каждого игрока из предметов есть адреналин и флэшка. Из способностей - генератор щитов и вор.\n\n'
-    text += '*5.* Перезарядка генератора щитов - 5 ходов, перезарядка переката - 5 ходов, перезарядка вора - 3 хода.\n\n'
-    text += '*6.* Сама по себе рапира не промахивается, хотя в меню персонажа написан шанс попадания. Шанс попадания рапиры по врагу - 100%, если тот не перекатывается '
-    text += 'и если у вас больше, чем 0 энергии. Если же враг перекатывается - смотрите пункт 3.'
-    sendm(bot, m.chat.id, text, reply_to_message_id=m.message_id, parse_mode='markdown')
+    sendm(bot, m.chat.id, lt(m.from_user.id, 'duel_rules'), reply_to_message_id=m.message_id, parse_mode='markdown')
+
 
 
 @bot.message_handler(commands=['v_pureduel'])
 def startgame(m):
     if not allowgames:
-        sendm(bot, m.chat.id, 'Проводятся технические работы, игры временно недоступны!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_disabled'))
         return
     if m.chat.id not in games:
         game = creategame(m)
@@ -7908,11 +7900,9 @@ def startgame(m):
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id,
-                         'Подготовка к дуэли на рапирах запущена! /v_join для присоединения. Правила режима: /duel_rules. Командный режим: ' +
-                         '/v_pureduel_teams. Статистика по режиму: /v_stats_pureduels')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'pureduel_start'))
     else:
-        sendm(bot, m.chat.id, 'В этом чате уже есть игра!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_already_exists'))
         return
 
 def get_pokemon_daytime():
@@ -8122,7 +8112,7 @@ def startgame(m):
 @bot.message_handler(commands=['v_pureduel_rats'])
 def startgame(m):
     if not allowgames:
-        sendm(bot, m.chat.id, 'Проводятся технические работы, игры временно недоступны!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'games_disabled'))
         return
     if m.chat.id not in games:
         game = creategame(m)
