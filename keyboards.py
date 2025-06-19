@@ -9,7 +9,7 @@ import os
 from pymongo import MongoClient
 
 from config import database, database2
-
+from Lan import lt
 client = MongoClient(database2)
 db=client.veganwars_rebuild
 users=db.users
