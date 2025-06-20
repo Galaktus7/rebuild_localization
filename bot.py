@@ -7587,8 +7587,8 @@ def join(m):
             sendm(bot, m.chat.id, 'У вас нет рп-профиля!')
             return
     try:
-        sendm(bot, m.from_user.id, 'Вы успешно присоединились!')
-        sendm(bot, m.chat.id, m.from_user.first_name + ' присоединился к игре!')
+        sendm(bot, m.from_user.id, lt(user_id, 'joined_success'))
+        sendm(bot, m.chat.id, lt(user_id, 'user_joined').format(m.from_user.first_name))
         teams = []
         x = 0
         for ids in game['players']:
@@ -8126,8 +8126,7 @@ def startgame(m):
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id, 'Подготовка к дуэли на рапирах против крысы запущена! /v_join для присоединения. Правила режима: /duel_rules. Командный режим: ' +
-                         '/v_pureduel_teams. Статистика по режиму: /v_stats_pureduels')
+        sendm(bot, m.chat.id, lt(user_id, 'duel_announcement'))
     else:
         sendm(bot, m.chat.id, 'В этом чате уже есть игра!')
         return
@@ -8136,7 +8135,7 @@ def startgame(m):
 @bot.message_handler(commands=['v_prepare_magic'])
 def startgame(m):
     if not allowgames:
-        sendm(bot, m.chat.id, 'Проводятся технические работы, игры временно недоступны!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'games_disabled'))
         return
     if m.from_user.id != pasyuk_id and m.chat.id != -1001541389947:
         return
@@ -8151,7 +8150,7 @@ def startgame(m):
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id, 'Подготовка к турниру заклинателей запущена! /v_join для присоединения.')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'prepare_magic'))
     else:
         sendm(bot, m.chat.id, 'В этом чате уже есть игра!')
         return
@@ -8159,7 +8158,7 @@ def startgame(m):
 @bot.message_handler(commands=['v_prepare_classic'])
 def startgame(m):
     if not allowgames:
-        sendm(bot, m.chat.id, 'Проводятся технические работы, игры временно недоступны!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'games_disabled'))
         return
     if m.chat.id not in games:
         game = creategame(m)
@@ -8173,16 +8172,16 @@ def startgame(m):
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id, 'Подготовка к классической игре запущена! /v_join для присоединения.')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'prepare_classic')')
     else:
-        sendm(bot, m.chat.id, 'В этом чате уже есть игра!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_already_exists'))
         return
 
 
 @bot.message_handler(commands=['v_pureduel_teams'])
 def startgame(m):
     if not allowgames:
-        sendm(bot, m.chat.id, 'Проводятся технические работы, игры временно недоступны!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'games_disabled'))
         return
     if m.chat.id not in games:
         game = creategame(m)
@@ -8196,17 +8195,16 @@ def startgame(m):
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id,
-                         'Подготовка к командной дуэли на рапирах запущена! /v_join для присоединения. Правила режима: /duel_rules')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'pureduel_teams'))
     else:
-        sendm(bot, m.chat.id, 'В этом чате уже есть игра!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_already_exists'))
         return
 
 
 @bot.message_handler(commands=['v_prepare_allrandom'])
 def startgame(m):
     if not allowgames:
-        sendm(bot, m.chat.id, 'Проводятся технические работы, игры временно недоступны!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'games_disabled'))
         return
     if m.chat.id not in games:
         game = creategame(m)
@@ -8219,17 +8217,16 @@ def startgame(m):
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id,
-                         'Подготовка к игре со случайным выбором экипировки запущена! /v_join для присоединения.')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'prepare_allrandom'))
     else:
-        sendm(bot, m.chat.id, 'В этом чате уже есть игра!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_already_exists'))
         return
 
 
 @bot.message_handler(commands=['v_prepare_tournier'])
 def startgametourn(m):
     if not allowgames:
-        sendm(bot, m.chat.id, 'Проводятся технические работы, игры временно недоступны!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'games_disabled'))
         return
     if m.from_user.id != pasyuk_id and m.chat.id not in [-1001541389947, -1001923672063, -1001891312421]:
         return
@@ -8244,9 +8241,9 @@ def startgametourn(m):
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id, 'Подготовка к турнирной игре запущена! /v_join для присоединения.')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'prepare_tournier'))
     else:
-        sendm(bot, m.chat.id, 'В этом чате уже есть игра!')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_already_exists'))
         return
 
 
