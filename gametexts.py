@@ -1,206 +1,8 @@
 import random
 
-def getname(x):
-    if x == 'x':
-        return 'x'
-    if x == 'armor':
-        return 'Бронежилет'
-    if x == 'shieldgen':
-        return 'Генератор щитов'
-    if x == 'sniper':
-        return 'Прицел'
-    if x == 'medic':
-        return 'Медик'
-    if x == 'dvuzhil':
-        return 'Двужильность'
-    if x == 'zombie':
-        return 'Зомби'
-    if x == 'hypnotist':
-        return 'Гипнотизёр'
-    if x == 'bicepc':
-        return 'Бицепс'
-    if x == 'pyromancer':
-        return 'Пироман'
-    if x == 'sadist':
-        return 'Садист'
-    if x == 'berserk':
-        return 'Берсерк'
-    if x == 'zapas':
-        return 'Запасливый'
-    if x == 'cherep':
-        return 'Крепкий череп'
-    if x == 'robot':
-        return 'Робот'
-    if x == 'visor':
-        return 'Визор'
-    if x == 'providets':
-        return 'Провидец'
-    if x == 'protivogaz':
-        return 'Противогаз'
-    if x == 'narkoman':
-        return 'Наркоман'
-    if x == 'vor':
-        return 'Вор'
-    if x == 'ritualist':
-        return 'Ритуалист'
-    if x == 'navod':
-        return 'Наводчик'
-    if x == 'oruzh':
-        return 'Оружейник'
-    if x == 'regeneration':
-        return 'Регенерация'
-    if x == 'bloodlust':
-        return 'Кровожадность'
-    if x == 'necromant':
-        return 'Некромант'
-    if x == 'warlock':
-        return 'Чернокнижник'
-    if x == 'elmo':
-        return 'elmo'
-    if x == 'incvizitor':
-        return 'Инквизитор'
-    if x == 'illusionist':
-        return 'Иллюзионист'
-    if x == 'demon':
-        return 'Bloodseeker'
-    if x == 'pyrotech':
-        return 'Пиротехник'
-    if x == 'monk':
-        return 'Монах'
-    if x == 'autist':
-        return 'Аутист'
-    if x == 'charge':
-        return 'Рывок'
-    if x == 'alchemist':
-        return 'Алхимик'
-    if x == 'ninja':
-        return 'Ниндзя'
-    if x == 'multicast':
-        return 'Концентрация'
-    if x == 'lastchance':
-        return 'Последний удар'
-    if x == 'invoker':
-        return 'Заклинатель'
-    if x == 'priest':
-        return 'Священник'
-    if x == 'ghoul_vampirism':
-        return 'Вампиризм'
-    if x == 'ghoul_bloodlust':
-        return 'Кровожадность вурдалака'
-    if x == 'bomber':
-        return 'Магия взрывов'
-    if x == 'inzhener':
-        return 'Инженер'
-    if x == 'amalgama_mutate':
-        return 'Мутация'
-    if x == 'scare':
-        return 'Страх'
-    if x == 'dark_energy':
-        return 'Энергия тьмы'
-    if x == 'grenade':
-        return 'Граната'
-    if x == 'adrenaline':
-        return 'Адреналин'
-    if x == 'shield':
-        return 'Щит'
-    if x == 'flash':
-        return 'Световая граната'
-    if x == 'knife':
-        return 'Метательный нож'
-    if x == 'dzet':
-        return 'Джет'
-    if x == 'molotov':
-        return 'Коктейль Молотова'
-    if x == 'hitin':
-        return 'Хитин'
-    if x == 'stimulator':
-        return 'Стимулятор'
-    if x == 'madpotion':
-        return 'Сыворотка бешенства'
-    if x == 'bomb':
-        return 'Самодельная бомба'
-    if x == 'bint':
-        return 'Бинт'
-    if x == 'miner':
-        return "Минёр"
-    if x == 'fire_regen':
-        return 'Адская регенерация'
-    if x == 'fire_power':
-        return 'Мощь огня'
-    if x == 'fire_resistance':
-        return 'Сопротивление огню'
-    if x == 'lucifer_shield':
-        return 'Огненный щит Люцифера'
-    if x == 'burrow':
-        return 'Подземная атака'
-    if x == 'lucifer_hellfire':
-        return "Адское пламя Люцифера"
-    if x == 'DOOM':
-        return "?"
-    if x == 'doom':
-        return "DOOM"
+def getname(x, user_id):
+    return lt(user_id, f'name_{x}')
     
-    if x == 'skeletonking':
-        return 'Король скелетов'
-    if x == 'vampire':
-        return 'Вампир'
-    if x == 'demonlord':
-        return 'Владыка демонов'
-
-
-    if x == 'armor_classic':
-        return 'Бронежилет'
-    if x == 'shieldgen_classic':
-        return 'Генератор щитов'
-    if x == 'sniper_classic':
-        return 'Прицел'
-    if x == 'medic_classic':
-        return 'Медик'
-    if x == 'dvuzhil_classic':
-        return 'Двужильность'
-    if x == 'zombie_classic':
-        return 'Зомби'
-    if x == 'hypnotist_classic':
-        return 'Гипнотизёр'
-    if x == 'bicepc_classic':
-        return 'Бицепс'
-    if x == 'pyromancer_classic':
-        return 'Пироман'
-    if x == 'sadist_classic':
-        return 'Садист'
-    if x == 'berserk_classic':
-        return 'Берсерк'
-    if x == 'zapas_classic':
-        return 'Запасливый'
-    if x == 'cherep_classic':
-        return 'Крепкий череп'
-    if x == 'visor_classic':
-        return 'Визор'
-    if x == 'protivogaz_classic':
-        return 'Противогаз'
-    if x == 'narkoman_classic':
-        return 'Наркоман'
-    if x == 'vor_classic':
-        return 'Вор'
-    if x == 'ritualist_classic':
-        return 'Ритуалист'
-    if x == 'navod_classic':
-        return 'Наводчик'
-    if x == 'oruzh_classic':
-        return 'Оружейник'
-    if x == 'fire_touch':
-        return 'Огненное прикосновение'
-    if x == 'add_tentacles':
-        return 'Щупальца ада'
-    if x == "dragon_power":
-        return "Сила дракона"
-    if x == "dragon_fireball":
-        return "Огненный шар"
-    if x == "wing_attack":
-        return "Атака крыльями"
-
-    return 'неизвестно'
-
 def getcustomtext(x):
     if x == 'tuman_perekat':
         return '"🌑|(Имя) скрылся под мраком ночи." - 💨|(Имя) перекатывается.'
@@ -387,15 +189,15 @@ def getplayertext(game, player):
     text = ''
     #if len(player['doomedskills']) > 0:
     #    text += '🔥💀🔥\n'
-    text += 'Ход '+str(game['turn'])+'\n'
+    text += lt(user_id, 'turn_number').format(turn=game['turn']) + '\n'
 
-    text += '♥️'*player['hp']+'|'+str(player['hp'])+' жизней. Максимум: '+str(player['maxhp'])+'\n'
+    text += '♥️' * player['hp'] + '|' + lt(user_id, 'hp_status').format(hp=player['hp'], maxhp=player['maxhp']) + '\n'
     if 'robot' not in player['skills']:
-        text += '⚡️'*player['energy']+'|'+str(player['energy'])+' энергии. Максимум: '+str(player['maxenergy'])+'\n'
+        text += '⚡️' * player['energy'] + '|' + lt(user_id, 'energy_status').format(energy=player['energy'], maxenergy=player['maxenergy']) + '\n'
     else:
-        text += '🤖|Перегрев: '+str(player['peregrev'])+'%\n'
+        text += '🤖|' + lt(user_id, 'overheat_status').format(peregrev=player['peregrev']) + '\n'
     if player['weapon'].name == 'Сюрикены':
-        text += '⚙|Сюрикены: '+str(player['shurikens'])+'\n'
+        text += '⚙|' + lt(user_id, 'shuriken_count').format(count=player['shurikens']) + '\n'
     #if player['weapon'].name == 'Дробовик':
     #    text += '🧰|Патроны: '+str(player['drobovik_charges'])+'/2\n'
   
