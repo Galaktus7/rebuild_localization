@@ -7887,7 +7887,7 @@ def duelrules(m):
 @bot.message_handler(commands=['v_pureduel'])
 def startgame(m):
     if not allowgames:
-        sendm(bot, m.chat.id, lt(m.from_user.id, 'games_disabled'))
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'game_disabled'))
         return
     if m.chat.id not in games:
         game = creategame(m)
