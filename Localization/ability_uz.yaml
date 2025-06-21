@@ -1,0 +1,104 @@
+name_x: "x"
+name_armor: "Бронежилет"
+name_shieldgen: "Генератор щитов"
+name_sniper: "Прицел"
+name_medic: "Медик"
+name_dvuzhil: "Двужильность"
+name_zombie: "Зомби"
+name_hypnotist: "Гипнотизёр"
+name_bicepc: "Бицепс"
+name_pyromancer: "Пироман"
+name_sadist: "Садист"
+name_berserk: "Берсерк"
+name_zapas: "Запасливый"
+name_cherep: "Крепкий череп"
+name_robot: "Робот"
+name_visor: "Визор"
+name_providets: "Провидец"
+name_protivogaz: "Противогаз"
+name_narkoman: "Наркоман"
+name_vor: "Вор"
+name_ritualist: "Ритуалист"
+name_navod: "Наводчик"
+name_oruzh: "Оружейник"
+name_regeneration: "Регенерация"
+name_bloodlust: "Кровожадность"
+name_necromant: "Некромант"
+name_warlock: "Чернокнижник"
+name_elmo: "elmo"
+name_incvizitor: "Инквизитор"
+name_illusionist: "Иллюзионист"
+name_demon: Bloodseeker
+name_pyrotech: Пиротехник
+name_monk: Монах
+name_autist: Аутист
+name_charge: Рывок
+name_alchemist: Алхимик
+name_ninja: Ниндзя
+name_multicast: Концентрация
+name_lastchance: Последний удар
+name_invoker: Заклинатель
+name_priest: Священник
+name_ghoul_vampirism: Вампиризм
+name_ghoul_bloodlust: Кровожадность вурдалака
+name_bomber: Магия взрывов
+name_inzhener: Инженер
+name_amalgama_mutate: Мутация
+name_scare: Страх
+name_dark_energy: Энергия тьмы
+name_grenade: Граната
+name_adrenaline: Адреналин
+name_shield: Щит
+name_flash: Световая граната
+name_knife: Метательный нож
+name_dzet: Джет
+name_molotov: Коктейль Молотова
+name_hitin: Хитин
+name_stimulator: Стимулятор
+name_madpotion: Сыворотка бешенства
+name_bomb: Самодельная бомба
+name_bint: Бинт
+name_miner: Минёр
+name_fire_regen: Адская регенерация
+name_fire_power: Мощь огня
+name_fire_resistance: Сопротивление огню
+name_lucifer_shield: Огненный щит Люцифера
+name_burrow: Подземная атака
+name_lucifer_hellfire: Адское пламя Люцифера
+name_DOOM: "?"
+name_doom: DOOM
+name_skeletonking: Король скелетов
+name_vampire: Вампир
+name_demonlord: Владыка демонов
+name_armor_classic: Бронежилет
+name_shieldgen_classic: Генератор щитов
+name_sniper_classic: Прицел
+name_medic_classic: Медик
+name_dvuzhil_classic: Двужильность
+name_zombie_classic: Зомби
+name_hypnotist_classic: Гипнотизёр
+name_bicepc_classic: Бицепс
+name_pyromancer_classic: Пироман
+name_sadist_classic: Садист
+name_berserk_classic: Берсерк
+name_zapas_classic: Запасливый
+name_cherep_classic: Крепкий череп
+name_visor_classic: Визор
+name_protivogaz_classic: Противогаз
+name_narkoman_classic: Наркоман
+name_vor_classic: Вор
+name_ritualist_classic: Ритуалист
+name_navod_classic: Наводчик
+name_oruzh_classic: Оружейник
+name_fire_touch: Огненное прикосновение
+name_add_tentacles: Щупальца ада
+name_dragon_power: Сила дракона
+name_dragon_fireball: Огненный шар
+name_wing_attack: Атака крыльями
+
+
+turn_number: "Ход {turn}"
+hp_status: "{hp} жизней. Максимум: {maxhp}"
+energy_status: "{energy} энергии. Максимум: {maxenergy}"
+overheat_status: "Перегрев: {peregrev}%"
+shuriken_count: "Сюрикены: {count}"
