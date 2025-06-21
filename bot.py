@@ -8172,7 +8172,7 @@ def startgame(m):
         t = threading.Timer(300, cancelgame, args=[game['id']])
         t.start()
         game['canceltimer'] = t
-        sendm(bot, m.chat.id, lt(m.from_user.id, 'prepare_classic')')
+        sendm(bot, m.chat.id, lt(m.from_user.id, 'prepare_classic'))
     else:
         sendm(bot, m.chat.id, lt(m.from_user.id, 'game_already_exists'))
         return
