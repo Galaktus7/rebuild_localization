@@ -7652,7 +7652,7 @@ def join(m):
             player['team'] = player['id']
 
     except:
-        sendm(bot, m.chat.id, lt(m.from_user.id, 'firststart'))
+        sendm(bot, m.chat.id, 'Для начала напишите боту в ЛС!')
 
 @bot.message_handler(commands=['give_dark'])
 def giveDARKrewarddd(m):
