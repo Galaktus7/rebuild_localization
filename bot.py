@@ -7587,8 +7587,8 @@ def join(m):
             sendm(bot, m.chat.id, 'У вас нет рп-профиля!')
             return
     try:
-        sendm(bot, m.from_user.id, lt(user_id, 'joined_success'))
-        sendm(bot, m.chat.id, lt(user_id, 'user_joined').format(m.from_user.first_name))
+        sendm(bot, m.from_user.id, 'Вы успешно присоединились!')
+        sendm(bot, m.chat.id, m.from_user.first_name + ' присоединился к игре!')
         teams = []
         x = 0
         for ids in game['players']:
