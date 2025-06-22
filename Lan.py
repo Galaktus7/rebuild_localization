@@ -98,9 +98,9 @@ def lt(target_id: int, key: str, force_lang: str = None) -> str:
     if force_lang:
         code = force_lang
     else:
-        lang = (chat_language_preferences.get(target_id, "русский")
+        lang = (chat_language_preferences.get(target_id, "узбекский")
                 if target_id < 0 else
-                user_language_preferences.get(target_id, "русский"))
+                user_language_preferences.get(target_id, "узбекский"))
         code = {"русский": "ru", "узбекский": "uz"}.get(lang, "ru")
     return LocalizedString(key).localize(code)
 
