@@ -440,41 +440,36 @@ def is_necromant_boss(player):
     return False
 
 def getplayerpodrobno(game, player):
-    chat_id = game['chat_id']
-    text = lt(chat_id, 'player_info_header') + '\n'
+    uid = player['id']
+    text = lt(uid, 'player_info_header') + '\n'
     text += player['name'] + '\n'
-    
-    text += '♥️' * player['hp'] + '|' + str(player['hp']) + ' ' + lt(chat_id, 'player_health') + ': ' + str(player['maxhp']) + '\n'
+
+    text += '♥️' * player['hp'] + '|' + str(player['hp']) + ' ' + lt(uid, 'player_health') + ': ' + str(player['maxhp']) + '\n'
 
     if 'robot' not in player['skills']:
         if 'носорог' in player['name'].lower() and player['controller'] == 'bot':
-            text += '⚡️? ' + lt(chat_id, 'player_energy') + '. ' + lt(chat_id, 'player_energy_max') + ': ?\n'
+            text += '⚡️? ' + lt(uid, 'player_energy') + '. ' + lt(uid, 'player_energy_max') + ': ?\n'
         else:
-            text += '⚡️' * player['energy'] + '|' + str(player['energy']) + ' ' + lt(chat_id, 'player_energy') + '. ' + lt(chat_id, 'player_energy_max') + ': ' + str(player['maxenergy']) + '\n'
+            text += '⚡️' * player['energy'] + '|' + str(player['energy']) + ' ' + lt(uid, 'player_energy') + '. ' + lt(uid, 'player_energy_max') + ': ' + str(player['maxenergy']) + '\n'
     else:
-        text += '🤖|'+lt(chat_id, 'player_overheat')+': '+str(player['peregrev'])+'%\n'
+        text += '🤖|' + lt(uid, 'player_overheat') + ': ' + str(player['peregrev']) + '%\n'
 
-    text += '💔x' + str(player['dmglimit']) + '/' + str(player['maxdmglimit']) + ' ' + lt(chat_id, 'player_wounds') + '\n'
+    text += '💔x' + str(player['dmglimit']) + '/' + str(player['maxdmglimit']) + ' ' + lt(uid, 'player_wounds') + '\n'
 
-    sposobnosti = ''
-    for ids in player['skills']:
-        sposobnosti += getname(ids) + ', '
     if player['is_necromant']:
         sposobnosti = '❓'
     else:
-        sposobnosti = sposobnosti[:-2]
-    text += lt(chat_id, 'player_skills') + ': ' + sposobnosti + '\n'
+        sposobnosti = ', '.join([getname(skill_id) for skill_id in player['skills']])
+    text += lt(uid, 'player_skills') + ': ' + sposobnosti + '\n'
 
-    predmeti = ''
-    for ids in player['inventory']:
-        predmeti += getname(ids) + ', '
     if player['is_necromant']:
         predmeti = '❓'
-    elif predmeti != '':
-        predmeti = predmeti[:-2]
-        text += lt(chat_id, 'player_items') + ': ' + predmeti + '\n'
+    else:
+        predmeti = ', '.join([getname(item_id) for item_id in player['inventory']])
+        if predmeti:
+            text += lt(uid, 'player_items') + ': ' + predmeti + '\n'
 
-    wdmg = 0  # Остается как есть
+    wdmg = 0  # Без изменений
     if player['weapon'].name in ['Огнемет', 'Огнемет Нарсил']:
         wdmg = '1-1'
     elif player['weapon'].name == 'Пистолет':
