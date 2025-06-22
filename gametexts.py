@@ -387,22 +387,22 @@ def gethitchance(player, energy=None, cubes=None):
 def getplayertext(game, player):
     text = ''
     
-    text += lt(game['chat_id'], 'turn_text').format(turn=game['turn']) + '\n'
-    text += '♥️' * player['hp'] + '|' + lt(game['chat_id'], 'hp_text').format(hp=player['hp'], maxhp=player['maxhp']) + '\n'
+    text += lt(player['id'], 'turn_text').format(turn=game['turn']) + '\n'
+    text += '♥️' * player['hp'] + '|' + lt(player['id'], 'hp_text').format(hp=player['hp'], maxhp=player['maxhp']) + '\n'
     
     if 'robot' not in player['skills']:
-        text += '⚡️' * player['energy'] + '|' + lt(game['chat_id'], 'energy_text').format(energy=player['energy'], maxenergy=player['maxenergy']) + '\n'
+        text += '⚡️' * player['energy'] + '|' + lt(player['id'], 'energy_text').format(energy=player['energy'], maxenergy=player['maxenergy']) + '\n'
     else:
-        text += '🤖|' + lt(game['chat_id'], 'overheat_text').format(p=player['peregrev']) + '\n'
+        text += '🤖|' + lt(player['id'], 'overheat_text').format(p=player['peregrev']) + '\n'
 
     if player['weapon'].name == 'Сюрикены':
-        text += '⚙|' + lt(game['chat_id'], 'shurikens_text').format(count=player['shurikens']) + '\n'
-        
-            # if player['weapon'].name == 'Дробовик':
+        text += '⚙|' + lt(player['id'], 'shurikens_text').format(count=player['shurikens']) + '\n'
+
+    # if player['weapon'].name == 'Дробовик':
     #     text += '🧰|Патроны: '+str(player['drobovik_charges'])+'/2\n'
 
     naturalchance = gethitchance(player)
-    text += lt(game['chat_id'], 'hit_chance_text').format(chance=naturalchance)
+    text += lt(player['id'], 'hit_chance_text').format(chance=naturalchance)
 
     if player['maintarget'] is not None and player['weapon'].name == 'Снайперская винтовка':
         energy = player['energy']
@@ -414,12 +414,13 @@ def getplayertext(game, player):
             energy += player['maintarget']['power'] * 6
         chance2 = gethitchance(player, energy)
         enemy = game['players'][player['maintarget']['target']]
-        text += '\n' + lt(game['chat_id'], 'sniper_hit_chance_text').format(enemy=enemy['name'], chance=chance2)
+        text += '\n' + lt(player['id'], 'sniper_hit_chance_text').format(enemy=enemy['name'], chance=chance2)
 
     if len(player.get('doomedskills', [])) > 0:
         text += '🔥🔥🔥💀🔥🔥🔥\n'
 
     return text
+
 
 
 
