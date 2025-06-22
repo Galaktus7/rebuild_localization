@@ -636,7 +636,10 @@ def getdarkkb(game, player):
 
     if player['lasthit'] > 0:
         kb = types.InlineKeyboardMarkup()
-        kb.add(types.InlineKeyboardButton(text='Умереть', callback_data='fightact?' + str(game['id']) + '?die'))
+        kb.add(types.InlineKeyboardButton(
+            text=lt(player['id'], 'die'),
+            callback_data='fightact?' + str(game['id']) + '?die'))
+        
 
     return kb
 
@@ -692,12 +695,12 @@ def gettargetkb(game, player, calldata, targettype = 'enemy', sniper = False, on
 
                                 elif player['weapon'].name == 'Молот' and player['molotcd'] <= 0 and player['energy'] >= 4:
                                     kb.add(types.InlineKeyboardButton(text = em+target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])),
-                                    types.InlineKeyboardButton(text = 'Точный удар', callback_data = 'fightact?'+str(game['id'])+'?'+'truestrike'+'?'+str(target['id'])))
+                                    types.InlineKeyboardButton(text = lt(player['id'], 'truestrike'), callback_data = 'fightact?'+str(game['id'])+'?'+'truestrike'+'?'+str(target['id'])))
 
                                             
                                 elif player['weapon'].name == 'Цепь' and player['chaincd'] <= 0:
                                     kb.add(types.InlineKeyboardButton(text = em+target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])),
-                                    types.InlineKeyboardButton(text = 'Выбить оружие', callback_data = 'fightact?'+str(game['id'])+'?'+'chain'+'?'+str(target['id'])))
+                                    types.InlineKeyboardButton(text = lt(player['id'], 'vibit'), callback_data = 'fightact?'+str(game['id'])+'?'+'chain'+'?'+str(target['id'])))
 
                                 #elif player['weapon'].name == 'Катана' and target['hp'] <= 1 and player['energy'] >= 5:
                                 #    kb.add(types.InlineKeyboardButton(text = target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])),
@@ -716,11 +719,11 @@ def gettargetkb(game, player, calldata, targettype = 'enemy', sniper = False, on
                                 pass
                             if player['weapon'].name == 'Лук' and player['firearrowcd'] <= 0:
                                 kb.add(types.InlineKeyboardButton(text = target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])), 
-                                types.InlineKeyboardButton(text = 'Огненная стрела', callback_data = 'fightact?'+str(game['id'])+'?'+'firearrow'+'?'+str(target['id'])))
+                                types.InlineKeyboardButton(text = lt(player['id'], 'firearrow'), callback_data = 'fightact?'+str(game['id'])+'?'+'firearrow'+'?'+str(target['id'])))
 
                             elif player['weapon'].name == 'Обрез' and player['obrezcd'] <= 0 and obrezz:
                                 kb.add(types.InlineKeyboardButton(text=target['name'], callback_data='fightact?' + str(game['id']) + '?' + calldata + '?' + str(target['id'])),
-                                       types.InlineKeyboardButton(text='Мощный выстрел',callback_data='fightact?' + str(game['id']) + '?' + 'strongshot' + '?' + str(target['id'])))
+                                       types.InlineKeyboardButton(text=lt(player['id'], 'strongshot'),callback_data='fightact?' + str(game['id']) + '?' + 'strongshot' + '?' + str(target['id'])))
                             elif player['weapon'].name == 'Пулемет' and player['machinegun_charges'] < 4:
                                 pass
                             else:
@@ -758,11 +761,12 @@ def gettargetkb(game, player, calldata, targettype = 'enemy', sniper = False, on
                     kb.add(types.InlineKeyboardButton(text = target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])))
         elif targettype == 'all':
             if target['team'] != player['team']:
-                doptext = '(Враг) '
+                doptext = lt(player['id'], 'enemy')
             else:
-                doptext = '(Союзник) '
+                doptext = lt(player['id'], 'ally')
             kb.add(types.InlineKeyboardButton(text = doptext+target['name'], callback_data = 'fightact?'+str(game['id'])+'?'+calldata+'?'+str(target['id'])))
 
+    ###########################################################vnizu ya ne trogal_ pasdagi kodga tegmadim
     if calldata == 'attack':
         if player['weapon'].name in ['Копье', 'Копье Нарсил'] and player['spearcd'] <= 0 and player['energy'] >= 1:
             kb.add(types.InlineKeyboardButton(text = 'Контратака', callback_data = 'fightact?'+str(game['id'])+'?'+'counterattack'))
@@ -950,6 +954,8 @@ def getadditionkb(game, player):
         kb.add(types.InlineKeyboardButton(text='DOOM',
                                           callback_data='fightact?' + str(game['id']) + '?' + 'doomselect'))
 
+################################################naverxu ne trogal _ tepdago kodga tegmadimhali
+    
     #if player['weapon'].name == 'Бита' and player['baseballcd'] <= 0:
     #    kb.add(types.InlineKeyboardButton(text = 'Оглушающий удар', callback_data = 'fightact?'+str(game['id'])+'?'+'stunhit'))   
         
@@ -958,7 +964,7 @@ def getadditionkb(game, player):
     if player['id'] == 319372123 and not game['tournier']:
         kb.add(types.InlineKeyboardButton(text='🍺Пивная победа',
                                           callback_data='fightact?' + str(game['id']) + '?' + 'eugenwin'))
-    kb.add(types.InlineKeyboardButton(text = 'Главное меню', callback_data = 'fightact?'+str(game['id'])+'?'+'mainmenu'))
+    kb.add(types.InlineKeyboardButton(text=lt(player['id'], 'glavnaya'), callback_data = 'fightact?'+str(game['id'])+'?'+'mainmenu'))
     return kb
   
 def getgrenadeselect(game, player):
@@ -1008,9 +1014,9 @@ def getminetimerselect(game, player):
 
 def meditationselect(game, player):
     kb = types.InlineKeyboardMarkup()
-    kb.add(types.InlineKeyboardButton(text = 'Стойкость', callback_data = 'fightact?'+str(game['id'])+'?'+'meditationstoikost'+'?'+'self'))
-    kb.add(types.InlineKeyboardButton(text = 'Концентрация', callback_data = 'fightact?'+str(game['id'])+'?'+'meditationconcselect'+'?'+'self'))
-    kb.add(types.InlineKeyboardButton(text = 'Главное меню', callback_data = 'fightact?'+str(game['id'])+'?'+'mainmenu'))
+    kb.add(types.InlineKeyboardButton(text=lt(player['id'], 'stoikost'), callback_data = 'fightact?'+str(game['id'])+'?'+'meditationstoikost'+'?'+'self'))
+    kb.add(types.InlineKeyboardButton(text=lt(player['id'], 'kts'), callback_data = 'fightact?'+str(game['id'])+'?'+'meditationconcselect'+'?'+'self'))
+    kb.add(types.InlineKeyboardButton(text=lt(player['id'], 'glavnaya'), callback_data = 'fightact?'+str(game['id'])+'?'+'mainmenu'))
     return kb
 
 def elem_to_emoji(x):
