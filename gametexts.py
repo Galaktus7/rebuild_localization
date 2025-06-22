@@ -385,36 +385,42 @@ def gethitchance(player, energy=None, cubes=None):
 
 def getplayertext(game, player):
     text = ''
-    #if len(player['doomedskills']) > 0:
-    #    text += '🔥💀🔥\n'
-    text += 'Ход '+str(game['turn'])+'\n'
+    
+    text += lt(game['chat_id'], 'turn_text').format(turn=game['turn']) + '\n'
 
-    text += '♥️'*player['hp']+'|'+str(player['hp'])+' жизней. Максимум: '+str(player['maxhp'])+'\n'
+    text += '♥️' * player['hp'] + '|' + lt(game['chat_id'], 'hp_text').format(hp=player['hp'], maxhp=player['maxhp']) + '\n'
+    
     if 'robot' not in player['skills']:
-        text += '⚡️'*player['energy']+'|'+str(player['energy'])+' энергии. Максимум: '+str(player['maxenergy'])+'\n'
+        text += '⚡️' * player['energy'] + '|' + lt(game['chat_id'], 'energy_text').format(energy=player['energy'], maxenergy=player['maxenergy']) + '\n'
     else:
-        text += '🤖|Перегрев: '+str(player['peregrev'])+'%\n'
+        text += '🤖|' + lt(game['chat_id'], 'overheat_text').format(p=player['peregrev']) + '\n'
+
     if player['weapon'].name == 'Сюрикены':
-        text += '⚙|Сюрикены: '+str(player['shurikens'])+'\n'
-    #if player['weapon'].name == 'Дробовик':
-    #    text += '🧰|Патроны: '+str(player['drobovik_charges'])+'/2\n'
-  
+        text += '⚙|' + lt(game['chat_id'], 'shurikens_text').format(count=player['shurikens']) + '\n'
+
+    # if player['weapon'].name == 'Дробовик':
+    #     text += '🧰|Патроны: '+str(player['drobovik_charges'])+'/2\n'
+
     naturalchance = gethitchance(player)
-    text += '🎯|Вероятность попасть - '+str(naturalchance)+'%'
+    text += lt(game['chat_id'], 'hit_chance_text').format(chance=naturalchance)
+
     if player['maintarget'] != None and player['weapon'].name == 'Снайперская винтовка':
         energy = player['energy']
         if 'robot' in player['skills']:
             energy = player['hp']
         if game['classic_game']:
-            energy += (player['maintarget']['power'] * 5)
+            energy += player['maintarget']['power'] * 5
         else:
-            energy += (player['maintarget']['power']*6)
+            energy += player['maintarget']['power'] * 6
         chance2 = gethitchance(player, energy)
         enemy = game['players'][player['maintarget']['target']]
-        text += '🎯|Вероятность попасть в '+enemy['name']+' - '+str(chance2)+'%\n'
+        text += '\n' + lt(game['chat_id'], 'sniper_hit_chance_text').format(enemy=enemy['name'], chance=chance2)
+
     if len(player['doomedskills']) > 0:
         text = '🔥🔥🔥💀🔥🔥🔥\n'
+
     return text
+
 
 def is_dark_boss(player):
     if player['is_dark_boss']:
@@ -432,33 +438,41 @@ def is_necromant_boss(player):
     return False
 
 def getplayerpodrobno(game, player):
-    text = 'Информация:\n'
-    text += player['name']+'\n'
-    text += '♥️'*player['hp']+'|'+str(player['hp'])+' жизней. Максимум: '+str(player['maxhp'])+'\n'
+    chat_id = game['chat_id']
+    text = lt(chat_id, 'player_info_header') + '\n'
+    text += player['name'] + '\n'
+    
+    text += '♥️' * player['hp'] + '|' + str(player['hp']) + ' ' + lt(chat_id, 'player_health') + ': ' + str(player['maxhp']) + '\n'
+
     if 'robot' not in player['skills']:
         if 'носорог' in player['name'].lower() and player['controller'] == 'bot':
-            text += '⚡️? энергии. Максимум: ?\n'
+            text += '⚡️? ' + lt(chat_id, 'player_energy') + '. ' + lt(chat_id, 'player_energy_max') + ': ?\n'
         else:
-            text += '⚡️'*player['energy']+'|'+str(player['energy'])+' энергии. Максимум: '+str(player['maxenergy'])+'\n'
+            text += '⚡️' * player['energy'] + '|' + str(player['energy']) + ' ' + lt(chat_id, 'player_energy') + '. ' + lt(chat_id, 'player_energy_max') + ': ' + str(player['maxenergy']) + '\n'
     else:
-        text += '🤖|Перегрев: '+str(player['peregrev'])+'%\n'
-    text += '💔x'+str(player['dmglimit'])+'/'+str(player['maxdmglimit'])+' ран. Влияет на потерю жизней\n'
+        text += '🤖|'+lt(chat_id, 'player_overheat')+': '+str(player['peregrev'])+'%\n'
+
+    text += '💔x' + str(player['dmglimit']) + '/' + str(player['maxdmglimit']) + ' ' + lt(chat_id, 'player_wounds') + '\n'
+
     sposobnosti = ''
     for ids in player['skills']:
-        sposobnosti += getname(ids)+', '
-    sposobnosti = sposobnosti[:len(sposobnosti)-2]
+        sposobnosti += getname(ids) + ', '
     if player['is_necromant']:
         sposobnosti = '❓'
-    text += 'Способности: '+sposobnosti+'\n'
+    else:
+        sposobnosti = sposobnosti[:-2]
+    text += lt(chat_id, 'player_skills') + ': ' + sposobnosti + '\n'
+
     predmeti = ''
     for ids in player['inventory']:
-        predmeti += getname(ids)+', '
+        predmeti += getname(ids) + ', '
     if player['is_necromant']:
         predmeti = '❓'
-    if predmeti != '':
-        predmeti = predmeti[:len(predmeti)-2]
-        text += 'Предметы: '+predmeti+'\n'
-    wdmg = 0
+    elif predmeti != '':
+        predmeti = predmeti[:-2]
+        text += lt(chat_id, 'player_items') + ': ' + predmeti + '\n'
+
+    wdmg = 0  # Остается как есть
     if player['weapon'].name in ['Огнемет', 'Огнемет Нарсил']:
         wdmg = '1-1'
     elif player['weapon'].name == 'Пистолет':
