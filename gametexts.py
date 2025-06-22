@@ -388,7 +388,6 @@ def getplayertext(game, player):
     text = ''
     
     text += lt(game['chat_id'], 'turn_text').format(turn=game['turn']) + '\n'
-
     text += '♥️' * player['hp'] + '|' + lt(game['chat_id'], 'hp_text').format(hp=player['hp'], maxhp=player['maxhp']) + '\n'
     
     if 'robot' not in player['skills']:
@@ -398,18 +397,18 @@ def getplayertext(game, player):
 
     if player['weapon'].name == 'Сюрикены':
         text += '⚙|' + lt(game['chat_id'], 'shurikens_text').format(count=player['shurikens']) + '\n'
-
-    # if player['weapon'].name == 'Дробовик':
+        
+            # if player['weapon'].name == 'Дробовик':
     #     text += '🧰|Патроны: '+str(player['drobovik_charges'])+'/2\n'
 
     naturalchance = gethitchance(player)
     text += lt(game['chat_id'], 'hit_chance_text').format(chance=naturalchance)
 
-    if player['maintarget'] != None and player['weapon'].name == 'Снайперская винтовка':
+    if player['maintarget'] is not None and player['weapon'].name == 'Снайперская винтовка':
         energy = player['energy']
         if 'robot' in player['skills']:
             energy = player['hp']
-        if game['classic_game']:
+        if game.get('classic_game'):
             energy += player['maintarget']['power'] * 5
         else:
             energy += player['maintarget']['power'] * 6
@@ -417,10 +416,11 @@ def getplayertext(game, player):
         enemy = game['players'][player['maintarget']['target']]
         text += '\n' + lt(game['chat_id'], 'sniper_hit_chance_text').format(enemy=enemy['name'], chance=chance2)
 
-    if len(player['doomedskills']) > 0:
-        text = '🔥🔥🔥💀🔥🔥🔥\n'
+    if len(player.get('doomedskills', [])) > 0:
+        text += '🔥🔥🔥💀🔥🔥🔥\n'
 
     return text
+
 
 
 def is_dark_boss(player):
