@@ -1,4 +1,5 @@
 import random
+from Lan import lt
 
 def getname(x):
     if x == 'x':
