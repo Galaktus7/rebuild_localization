@@ -575,7 +575,7 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
         else:
             text = lt(player['id'], 'revolver_text').format(attacker=player['name'], target=target['name'], damage=damage)
     
-        elif isinstance(weapon, (weaponlist.Electro):
+        elif isinstance(weapon, weaponlist.Electro):
             key = None
             for k in player.get('customtexts', {}):
                 if k.endswith('_electro') and player['customtexts'][k]:
