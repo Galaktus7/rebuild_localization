@@ -525,12 +525,12 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
     ########################################################## CW ########################################################
     ########################################################## CW ########################################################
     ########################################################## CW ########################################################
-    elif weapon.name == 'Пистолет':
+  #  elif weapon.name == 'Пистолет':
   #      if 'zilch_pistol' in player['customtexts'] and player['customtexts']['zilch_pistol']:
      #       text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета Нарсил! Нанесено '+str(damage)+' урона.'
     #    else:
     #        text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета! Нанесено '+str(damage)+' урона.'
-  #  elif weapon.name == 'Пистолет':
+    elif isinstance(weapon, weaponlist.Pistol):
         key = None
         for k in player.get('customtexts', {}):
             if k.endswith('_pistol') and player['customtexts'][k]:
