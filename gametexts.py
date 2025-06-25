@@ -526,20 +526,20 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
     ########################################################## CW ########################################################
     ########################################################## CW ########################################################
     elif weapon.name == 'Пистолет':
-        if 'zilch_pistol' in player['customtexts'] and player['customtexts']['zilch_pistol']:
-            text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета Нарсил! Нанесено '+str(damage)+' урона.'
-        else:
-            text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета! Нанесено '+str(damage)+' урона.'
+  #      if 'zilch_pistol' in player['customtexts'] and player['customtexts']['zilch_pistol']:
+     #       text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета Нарсил! Нанесено '+str(damage)+' урона.'
+    #    else:
+    #        text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета! Нанесено '+str(damage)+' урона.'
   #  elif weapon.name == 'Пистолет':
-   #     key = None
-    #    for k in player.get('customtexts', {}):
-     #       if k.endswith('_pistol') and player['customtexts'][k]:
-      #          key = f"{k}_text"
-       #         break
-        #if key:
-         #   text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
-       # else:
-        #    text = lt(player['id'], 'pistol_text').format(attacker=player['name'], target=target['name'], damage=damage)
+        key = None
+        for k in player.get('customtexts', {}):
+            if k.endswith('_pistol') and player['customtexts'][k]:
+                key = f"{k}_text"
+                break
+        if key:
+            text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
+        else:
+            text = lt(player['id'], 'pistol_text').format(attacker=player['name'], target=target['name'], damage=damage)
 
 
                      
