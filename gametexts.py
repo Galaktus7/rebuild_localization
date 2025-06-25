@@ -529,7 +529,7 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
       #      text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета Нарсил! Нанесено '+str(damage)+' урона.'
        # else:
         #    text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета! Нанесено '+str(damage)+' урона.'
-    elif weaponlist.Pistol:
+    elif weapon.name == 'Пистолет':
         key = None
         for k in player.get('customtexts', {}):
             if k.endswith('_pistol') and player['customtexts'][k]:
