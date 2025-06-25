@@ -525,12 +525,7 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
     ########################################################## CW ########################################################
     ########################################################## CW ########################################################
     ########################################################## CW ########################################################
-  #  elif weapon.name == 'Пистолет':
-  #      if 'zilch_pistol' in player['customtexts'] and player['customtexts']['zilch_pistol']:
-     #       text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета Нарсил! Нанесено '+str(damage)+' урона.'
-    #    else:
-    #        text = '💥|'+player['name']+' стреляет в '+target['name']+' из пистолета! Нанесено '+str(damage)+' урона.'
-    elif isinstance(weapon, weaponlist.Pistol):
+    elif isinstance(weapon, (weaponlist.Pistol, weaponlist.Pistol_classic)):
         key = None
         for k in player.get('customtexts', {}):
             if k.endswith('_pistol') and player['customtexts'][k]:
@@ -540,31 +535,50 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
             text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
         else:
             text = lt(player['id'], 'pistol_text').format(attacker=player['name'], target=target['name'], damage=damage)
+    
+    elif isinstance(weapon, (weaponlist.Obrez, (weaponlist.Obrez_classic):
+    key = None
+    for k in player.get('customtexts', {}):
+        if k.endswith('_obrez') and player['customtexts'][k]:
+            key = f"{k}_text"
+            break
+
+    if not player.get('strongshot'):
+        if key:
+            text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
+        else:
+            text = lt(player['id'], 'obrez_text').format(attacker=player['name'], target=target['name'], damage=damage)
+    else:
+        if key:
+            text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
+        else:
+            text = lt(player['id'], 'obrez_strong_text').format(attacker=player['name'], target=target['name'], damage=damage)
+
+    elif isinstance(weapon, (weaponlist.Drobovik, weaponlist.Drobovik_classic)):
+        key = None
+        for k in player.get('customtexts', {}):
+            if k.endswith('_drobovik') and player['customtexts'][k]:
+                key = f"{k}_text"
+                break
+        if key:
+            text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
+        else:
+            text = lt(player['id'], 'drobovik_text').format(attacker=player['name'], target=target['name'], damage=damage)
+    
+    elif isinstance(weapon, (weaponlist.Revolver, weaponlist.Revolver_classic)):
+        key = None
+        for k in player.get('customtexts', {}):
+            if k.endswith('_revolver') and player['customtexts'][k]:
+                key = f"{k}_text"
+                break
+        if key:
+            text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
+        else:
+            text = lt(player['id'], 'revolver_text').format(attacker=player['name'], target=target['name'], damage=damage)
+    
 
 
-                     
-    elif weapon.name == 'Обрез':
-        if not player['strongshot']:
-            if 'zilch_obrez' in player['customtexts'] and player['customtexts']['zilch_obrez']:
-                text = '💥|'+player['name']+' стреляет в '+target['name']+' из обреза Нарсил! Нанесено '+str(damage)+' урона.'
-            else:
-                text = '💥|'+player['name']+' стреляет в '+target['name']+' из обреза! Нанесено '+str(damage)+' урона.'
-        else:
-            if 'zilch_obrez' in player['customtexts'] and player['customtexts']['zilch_obrez']:
-                text = '💥❗️|'+player['name']+' совершает мощный выстрел по '+target['name']+'! Нанесено '+str(damage)+' урона.'
-            else:
-                text = '💥❗️|'+player['name'] +' совершает мощный выстрел по '+target['name']+'! Нанесено '+str(damage)+' урона.'
-    elif weapon.name == 'Дробовик':
-        if 'zilch_drobovik' in player['customtexts'] and player['customtexts']['zilch_drobovik']:
-            text = '💥|'+player['name']+' стреляет в ' + target['name'] + ' из дробовика Нарсил! Нанесено '+str(damage)+' урона.'
-        else:
-            text = '💥|'+player['name']+' стреляет в '+target['name']+' из дробовика! Нанесено '+str(damage)+' урона.'
-    elif weapon.name == 'Револьвер':
-        if 'zilch_revolver' in player['customtexts'] and player['customtexts']['zilch_revolver']:
-            text = '💥|'+player['name']+' стреляет в '+target['name']+' из револьвера Нарсил! Нанесено '+str(
-                damage)+' урона.'
-        else:
-            text = '💥|'+player['name']+' стреляет в '+target['name']+' из револьвера! Нанесено '+str(damage)+' урона.'
+
     elif weapon.name == 'Электрошокер':
         text = '💥|'+player['name']+' стреляет в '+target['name']+' из электрошокера! Нанесено '+str(damage)+' урона.'
     elif weapon.name == 'Огнемет':
