@@ -1,5 +1,6 @@
 import random
 from Lan import lt
+import weaponlist
 
 def getname(x):
     if x == 'x':
