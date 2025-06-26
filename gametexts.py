@@ -574,8 +574,8 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
             text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
         else:
             text = lt(player['id'], 'revolver_text').format(attacker=player['name'], target=target['name'], damage=damage)
-    
-        elif isinstance(weapon, weaponlist.Electro):
+
+    elif isinstance(weapon, weaponlist.Electro):
             key = None
             for k in player.get('customtexts', {}):
                 if k.endswith('_electro') and player['customtexts'][k]:
@@ -585,9 +585,8 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
                 text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
             else:
                 text = lt(player['id'], 'electro_text').format(attacker=player['name'], target=target['name'], damage=damage)
-
-
-        elif isinstance(weapon, (weaponlist.Flamethrower, weaponlist.Flamethrower_classic)):
+        
+    elif isinstance(weapon, (weaponlist.Flamethrower, weaponlist.Flamethrower_classic)):
             key = None
             for k in player.get('customtexts', {}):
                 if k.endswith('_flamethrower') and player['customtexts'][k]:
@@ -598,17 +597,30 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
             else:
                 text = lt(player['id'], 'flamethrower_text').format(attacker=player['name'], target=target['name'], damage=damage)
 
+        
+    elif isinstance(weapon, weaponlist.Flamethrower_narsil):
+            key = None
+            for k in player.get('customtexts', {}):
+                if k.endswith('_flamethrower_narsil') and player['customtexts'][k]:
+                    key = f"{k}_text"
+                    break
+            if key:
+                text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
+            else:
+                text = lt(player['id'], 'flamethrower_narsil_text').format(attacker=player['name'], target=target['name'], damage=damage)
 
+  #  elif isinstance(weapon, weaponlist.Saw):
+ #           key = None
+   #         for k in player.get('customtexts', {}):
+    #            if k.endswith('_saw') and player['customtexts'][k]:
+      #              key = f"{k}_text"
+        #            break
+        #    if key:
+       #         text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
+      #      else:
+       #         text = lt(player['id'], 'saw_text').format(attacker=player['name'], target=target['name'], damage=damage)
 
                      
-#    elif weapon.name == 'Огнемет':
- #       if 'alex_flamethrower' in player['customtexts'] and player['customtexts']['alex_flamethrower']:
-  #          text = '💥|'+player['name'] + ' извергает пламя в '+target['name']+' из Пасти Дракона! Нанесено '+str(
-   #             damage)+' урона.'
-    #    else:
-     #       text = '💥|'+player['name']+' стреляет в '+target['name']+' из огнемета! Нанесено '+str(damage)+' урона.'
-    elif weapon.name == 'Огнемет Нарсил':
-        text = '💥|'+player['name']+' стреляет в '+target['name']+' из огнемета Нарсил! Нанесено '+str(damage)+' урона.'
     elif weapon.name == 'Пиломет':
         if 'zilch_saw' in player['customtexts'] and player['customtexts']['zilch_saw']:
             text = '💥|'+player['name']+' стреляет в '+target['name']+' из пиломета Нарсил! Нанесено '+str(damage)+' урона.'
@@ -616,6 +628,18 @@ def getattacktext(game, player, target, damage, bicepc = False, firetext = '', s
             text = '🧱|'+player['name']+' швыряет в '+target['name']+' шлакоблоком! Нанесено '+str(damage)+' урона.'
         else:
             text = '💥|'+player['name']+' стреляет в '+target['name']+' из пиломета! Нанесено '+str(damage)+' урона.'
+
+    elif isinstance(weapon, weaponlist.Flamethrower_narsil):
+            key = None
+            for k in player.get('customtexts', {}):
+                if k.endswith('_flamethrower_narsil') and player['customtexts'][k]:
+                    key = f"{k}_text"
+                    break
+            if key:
+                text = lt(player['id'], key).format(attacker=player['name'], target=target['name'], damage=damage)
+            else:
+                text = lt(player['id'], 'flamethrower_narsil_text').format(attacker=player['name'], target=target['name'], damage=damage)
+                     
     elif weapon.name == 'Камень':
         text = '💥|'+player['name']+' кидает камень в '+target['name']+'! Нанесено '+str(damage)+' урона.'
     elif weapon.name == 'Лук Асгард':
